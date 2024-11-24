@@ -47,7 +47,7 @@ func TestGetWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistGetter(&config.Envs{}, m)
@@ -147,7 +147,7 @@ func TestGetWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistGetter(&config.Envs{}, m)
@@ -177,7 +177,7 @@ func TestGetWishlist(t *testing.T) {
 			Do(gomock.Any()).
 			Return(nil, wantErr)
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistGetter(&config.Envs{}, m)
@@ -202,7 +202,7 @@ func TestGetWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistGetter(&config.Envs{}, m)
@@ -228,7 +228,7 @@ func TestGetWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistGetter(&config.Envs{}, m)
@@ -257,7 +257,7 @@ func TestUpdateWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistUpdater(&config.Envs{}, m)
@@ -318,7 +318,7 @@ func TestUpdateWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistUpdater(&config.Envs{}, m)
@@ -351,7 +351,7 @@ func TestUpdateWishlist(t *testing.T) {
 			Do(gomock.Any()).
 			Return(nil, wantErr)
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistUpdater(&config.Envs{}, m)
@@ -412,7 +412,7 @@ func TestUpdateWishlist(t *testing.T) {
 				}, nil
 			})
 
-		// Run the method to test
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
 		wg := NewWishlistUpdater(&config.Envs{}, m)

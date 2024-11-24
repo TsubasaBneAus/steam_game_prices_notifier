@@ -11,9 +11,9 @@ func TestNotionToTime(t *testing.T) {
 	t.Run("Positive case: Convert date string successfully", func(t *testing.T) {
 		t.Parallel()
 
+		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
-
 		date := Date{
 			Start: "2024-12-31",
 		}
@@ -37,9 +37,9 @@ func TestNotionToTime(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
+			// Execute the method to be tested
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
-
 			date := Date{
 				Start: tc.date,
 			}
