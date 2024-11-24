@@ -1,0 +1,23 @@
+name: octocov
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v4
+
+      - name: Set up Go based on the go.mod file
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "./go.mod"
+
+      - name: Run tests with the coverage output
+        run: go test -v ./... -coverprofile=coverage.out
+
+      - name: Create a coverage report
+        uses: k1LoW/octocov-action@v1
