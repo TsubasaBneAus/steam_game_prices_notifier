@@ -1,0 +1,10 @@
+{
+  "object": "list",
+  "results": [],
+  "next_cursor": null,
+  "has_more": false,
+  "type": "page_or_database",
+  "page_or_database": {},
+  "developer_survey": "https://notionup.typeform.com/to/bllBsoI4?utm_source=postman",
+  "request_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+}
