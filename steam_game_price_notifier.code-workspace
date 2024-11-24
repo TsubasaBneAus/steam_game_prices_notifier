@@ -5,6 +5,17 @@
     }
   ],
   "settings": {
-    "cSpell.words": ["coverprofile", "dotenv", "octocov", "reviewdog"]
+    "cSpell.words": [
+      "APIURL",
+      "coverprofile",
+      "dotenv",
+      "gomock",
+      "gomod",
+      "mockgen",
+      "octocov",
+      "reviewdog",
+      "shogo",
+      "Tsubasa"
+    ]
   }
 }
