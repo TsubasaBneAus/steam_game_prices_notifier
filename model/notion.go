@@ -53,14 +53,14 @@ type Date struct {
 	Start string `json:"start"`
 }
 
-// Convert string to time.Time (JST)
+// Convert date string to time.Time (JST)
 func (d *Date) ToTime(ctx context.Context) (*time.Time, error) {
 	loc, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to load location", slog.Any("error", err))
 		return nil, err
 	}
-	parsedTime, err := time.ParseInLocation(time.DateOnly, "2013-11-03", loc)
+	parsedTime, err := time.ParseInLocation(time.DateOnly, d.Start, loc)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to parse string to time.Time", slog.Any("error", err))
 		return nil, err
