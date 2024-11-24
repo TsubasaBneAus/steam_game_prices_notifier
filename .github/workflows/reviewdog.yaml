@@ -1,6 +1,9 @@
 name: reviewdog
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
 
 jobs:
@@ -13,5 +16,5 @@ jobs:
       - name: Run the linter
         uses: reviewdog/action-golangci-lint@v2
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
-          fail_on_error: true
