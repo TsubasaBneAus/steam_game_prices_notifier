@@ -1,4 +1,4 @@
-name: octocov
+name: Test
 
 permissions:
   contents: read
@@ -11,7 +11,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  octocov:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code into the Go module directory
