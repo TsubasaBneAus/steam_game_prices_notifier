@@ -1,0 +1,66 @@
+linters:
+  disable-all: true
+  enable:
+    # Enabled by default
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+
+    # Disabled by default
+    - bodyclose
+    - containedctx
+    - gci
+    - goconst
+    - godox
+    - gofumpt
+    - gosec
+    - ireturn
+    - makezero
+    - mirror
+    - misspell
+    - musttag
+    - nestif
+    - nilerr
+    - noctx
+    - nonamedreturns
+    - revive
+    - sloglint
+    - tenv
+
+linters-settings:
+  gosec:
+    excludes:
+      - G115
+  revive:
+    ignore-generated-header: true
+    rules:
+      - name: blank-imports
+      - name: context-as-argument
+      - name: context-keys-type
+      - name: dot-imports
+      - name: empty-block
+      - name: errorf
+      - name: error-return
+      - name: error-strings
+      - name: error-naming
+      - name: exported
+        arguments:
+          - "checkPrivateReceivers"
+      - name: if-return
+      - name: increment-decrement
+      - name: indent-error-flow
+      - name: range
+      - name: receiver-naming
+      - name: redefines-builtin-id
+      - name: superfluous-else
+      - name: time-naming
+      - name: unreachable-code
+      - name: var-declaration
+      - name: var-naming
+
+issues:
+  include:
+    - EXC0012
