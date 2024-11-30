@@ -80,32 +80,95 @@ func (c *MockNotionWishlistGetterGetNotionWishlistCall) DoAndReturn(f func(conte
 	return c
 }
 
-// MockNotionWishlistUpdater is a mock of NotionWishlistItemUpdater interface.
-type MockNotionWishlistUpdater struct {
+// MockNotionWishlistItemCreator is a mock of NotionWishlistItemCreator interface.
+type MockNotionWishlistItemCreator struct {
 	ctrl     *gomock.Controller
-	recorder *MockNotionWishlistUpdaterMockRecorder
+	recorder *MockNotionWishlistItemCreatorMockRecorder
 	isgomock struct{}
 }
 
-// MockNotionWishlistUpdaterMockRecorder is the mock recorder for MockNotionWishlistUpdater.
-type MockNotionWishlistUpdaterMockRecorder struct {
-	mock *MockNotionWishlistUpdater
+// MockNotionWishlistItemCreatorMockRecorder is the mock recorder for MockNotionWishlistItemCreator.
+type MockNotionWishlistItemCreatorMockRecorder struct {
+	mock *MockNotionWishlistItemCreator
 }
 
-// NewMockNotionWishlistUpdater creates a new mock instance.
-func NewMockNotionWishlistUpdater(ctrl *gomock.Controller) *MockNotionWishlistUpdater {
-	mock := &MockNotionWishlistUpdater{ctrl: ctrl}
-	mock.recorder = &MockNotionWishlistUpdaterMockRecorder{mock}
+// NewMockNotionWishlistItemCreator creates a new mock instance.
+func NewMockNotionWishlistItemCreator(ctrl *gomock.Controller) *MockNotionWishlistItemCreator {
+	mock := &MockNotionWishlistItemCreator{ctrl: ctrl}
+	mock.recorder = &MockNotionWishlistItemCreatorMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockNotionWishlistUpdater) EXPECT() *MockNotionWishlistUpdaterMockRecorder {
+func (m *MockNotionWishlistItemCreator) EXPECT() *MockNotionWishlistItemCreatorMockRecorder {
+	return m.recorder
+}
+
+// CreateNotionWishlistItem mocks base method.
+func (m *MockNotionWishlistItemCreator) CreateNotionWishlistItem(ctx context.Context, input *service.CreateNotionWishlistItemInput) (*service.CreateNotionWishlistItemOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateNotionWishlistItem", ctx, input)
+	ret0, _ := ret[0].(*service.CreateNotionWishlistItemOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateNotionWishlistItem indicates an expected call of CreateNotionWishlistItem.
+func (mr *MockNotionWishlistItemCreatorMockRecorder) CreateNotionWishlistItem(ctx, input any) *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall {
+	mr.mock.ctrl.T.Helper()
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateNotionWishlistItem", reflect.TypeOf((*MockNotionWishlistItemCreator)(nil).CreateNotionWishlistItem), ctx, input)
+	return &MockNotionWishlistItemCreatorCreateNotionWishlistItemCall{Call: call}
+}
+
+// MockNotionWishlistItemCreatorCreateNotionWishlistItemCall wrap *gomock.Call
+type MockNotionWishlistItemCreatorCreateNotionWishlistItemCall struct {
+	*gomock.Call
+}
+
+// Return rewrite *gomock.Call.Return
+func (c *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall) Return(arg0 *service.CreateNotionWishlistItemOutput, arg1 error) *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall {
+	c.Call = c.Call.Return(arg0, arg1)
+	return c
+}
+
+// Do rewrite *gomock.Call.Do
+func (c *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall) Do(f func(context.Context, *service.CreateNotionWishlistItemInput) (*service.CreateNotionWishlistItemOutput, error)) *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall {
+	c.Call = c.Call.Do(f)
+	return c
+}
+
+// DoAndReturn rewrite *gomock.Call.DoAndReturn
+func (c *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall) DoAndReturn(f func(context.Context, *service.CreateNotionWishlistItemInput) (*service.CreateNotionWishlistItemOutput, error)) *MockNotionWishlistItemCreatorCreateNotionWishlistItemCall {
+	c.Call = c.Call.DoAndReturn(f)
+	return c
+}
+
+// MockNotionWishlistItemUpdater is a mock of NotionWishlistItemUpdater interface.
+type MockNotionWishlistItemUpdater struct {
+	ctrl     *gomock.Controller
+	recorder *MockNotionWishlistItemUpdaterMockRecorder
+	isgomock struct{}
+}
+
+// MockNotionWishlistItemUpdaterMockRecorder is the mock recorder for MockNotionWishlistItemUpdater.
+type MockNotionWishlistItemUpdaterMockRecorder struct {
+	mock *MockNotionWishlistItemUpdater
+}
+
+// NewMockNotionWishlistItemUpdater creates a new mock instance.
+func NewMockNotionWishlistItemUpdater(ctrl *gomock.Controller) *MockNotionWishlistItemUpdater {
+	mock := &MockNotionWishlistItemUpdater{ctrl: ctrl}
+	mock.recorder = &MockNotionWishlistItemUpdaterMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockNotionWishlistItemUpdater) EXPECT() *MockNotionWishlistItemUpdaterMockRecorder {
 	return m.recorder
 }
 
 // UpdateNotionWishlistItem mocks base method.
-func (m *MockNotionWishlistUpdater) UpdateNotionWishlistItem(ctx context.Context, input *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error) {
+func (m *MockNotionWishlistItemUpdater) UpdateNotionWishlistItem(ctx context.Context, input *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateNotionWishlistItem", ctx, input)
 	ret0, _ := ret[0].(*service.UpdateNotionWishlistItemOutput)
@@ -114,31 +177,31 @@ func (m *MockNotionWishlistUpdater) UpdateNotionWishlistItem(ctx context.Context
 }
 
 // UpdateNotionWishlistItem indicates an expected call of UpdateNotionWishlistItem.
-func (mr *MockNotionWishlistUpdaterMockRecorder) UpdateNotionWishlistItem(ctx, input any) *MockNotionWishlistUpdaterUpdateNotionWishlistCall {
+func (mr *MockNotionWishlistItemUpdaterMockRecorder) UpdateNotionWishlistItem(ctx, input any) *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall {
 	mr.mock.ctrl.T.Helper()
-	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotionWishlistItem", reflect.TypeOf((*MockNotionWishlistUpdater)(nil).UpdateNotionWishlistItem), ctx, input)
-	return &MockNotionWishlistUpdaterUpdateNotionWishlistCall{Call: call}
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateNotionWishlistItem", reflect.TypeOf((*MockNotionWishlistItemUpdater)(nil).UpdateNotionWishlistItem), ctx, input)
+	return &MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall{Call: call}
 }
 
-// MockNotionWishlistUpdaterUpdateNotionWishlistCall wrap *gomock.Call
-type MockNotionWishlistUpdaterUpdateNotionWishlistCall struct {
+// MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall wrap *gomock.Call
+type MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall struct {
 	*gomock.Call
 }
 
 // Return rewrite *gomock.Call.Return
-func (c *MockNotionWishlistUpdaterUpdateNotionWishlistCall) Return(arg0 *service.UpdateNotionWishlistItemOutput, arg1 error) *MockNotionWishlistUpdaterUpdateNotionWishlistCall {
+func (c *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall) Return(arg0 *service.UpdateNotionWishlistItemOutput, arg1 error) *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall {
 	c.Call = c.Call.Return(arg0, arg1)
 	return c
 }
 
 // Do rewrite *gomock.Call.Do
-func (c *MockNotionWishlistUpdaterUpdateNotionWishlistCall) Do(f func(context.Context, *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error)) *MockNotionWishlistUpdaterUpdateNotionWishlistCall {
+func (c *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall) Do(f func(context.Context, *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error)) *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall {
 	c.Call = c.Call.Do(f)
 	return c
 }
 
 // DoAndReturn rewrite *gomock.Call.DoAndReturn
-func (c *MockNotionWishlistUpdaterUpdateNotionWishlistCall) DoAndReturn(f func(context.Context, *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error)) *MockNotionWishlistUpdaterUpdateNotionWishlistCall {
+func (c *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall) DoAndReturn(f func(context.Context, *service.UpdateNotionWishlistItemInput) (*service.UpdateNotionWishlistItemOutput, error)) *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall {
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }

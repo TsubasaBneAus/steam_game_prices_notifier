@@ -1,0 +1,33 @@
+{
+  "parent": {
+    "type": "database_id",
+    "database_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+  },
+  "properties": {
+    "Current Price": {
+      "id": "PHrn",
+      "type": "number",
+      "number": null
+    },
+    "Name": {
+      "id": "V%5DhB",
+      "type": "rich_text",
+      "rich_text": []
+    },
+    "Release Date": {
+      "id": "%5CfKe",
+      "type": "date",
+      "date": null
+    },
+    "Lowest Price": {
+      "id": "tVuT",
+      "type": "number",
+      "number": null
+    },
+    "App ID": {
+      "id": "title",
+      "type": "title",
+      "title": []
+    }
+  }
+}

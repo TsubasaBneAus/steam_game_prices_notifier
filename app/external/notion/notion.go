@@ -90,6 +90,70 @@ func (g *notionWishlistGetter) GetNotionWishlist(
 	}, nil
 }
 
+type notionWishlistItemCreator struct {
+	cfg        *config.NotionConfig
+	httpClient service.HTTPClient
+}
+
+var _ service.NotionWishlistItemCreator = (*notionWishlistItemCreator)(nil)
+
+// Generate a new NotionWishlistItemCreator
+func NewNotionWishlistItemCreator(
+	cfg *config.NotionConfig,
+	httpClient service.HTTPClient,
+) *notionWishlistItemCreator {
+	return &notionWishlistItemCreator{
+		cfg:        cfg,
+		httpClient: httpClient,
+	}
+}
+
+// Create a wishlist item in the Notion DB
+func (c *notionWishlistItemCreator) CreateNotionWishlistItem(
+	ctx context.Context,
+	input *service.CreateNotionWishlistItemInput,
+) (*service.CreateNotionWishlistItemOutput, error) {
+	reqURL, err := url.JoinPath(notionAPIURL, "pages")
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to build a Notion API URL", slog.Any("error", err))
+		return nil, err
+	}
+
+	reqJSON, err := json.Marshal(input.WishlistItem)
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to marshal a Notion API request body", slog.Any("error", err))
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, reqURL, bytes.NewBuffer(reqJSON))
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
+		return nil, err
+	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.cfg.NotionAPIKey))
+	req.Header.Set("Notion-Version", "2022-06-28")
+	req.Header.Set("Content-Type", "application/json")
+
+	res, err := c.httpClient.Do(req)
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to send a Notion API request", slog.Any("error", err))
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		slog.ErrorContext(
+			ctx,
+			"unexpected status code in a Notion API response",
+			slog.Any("status_code", res.StatusCode),
+		)
+		return nil, errUnexpectedStatusCode
+	}
+
+	return &service.CreateNotionWishlistItemOutput{}, nil
+}
+
 type notionWishlistItemUpdater struct {
 	cfg        *config.NotionConfig
 	httpClient service.HTTPClient
