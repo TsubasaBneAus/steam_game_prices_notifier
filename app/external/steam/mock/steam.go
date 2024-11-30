@@ -79,3 +79,66 @@ func (c *MockSteamWishlistGetterGetSteamWishlistCall) DoAndReturn(f func(context
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }
+
+// MockSteamVideoGameDetailsGetter is a mock of SteamVideoGameDetailsGetter interface.
+type MockSteamVideoGameDetailsGetter struct {
+	ctrl     *gomock.Controller
+	recorder *MockSteamVideoGameDetailsGetterMockRecorder
+	isgomock struct{}
+}
+
+// MockSteamVideoGameDetailsGetterMockRecorder is the mock recorder for MockSteamVideoGameDetailsGetter.
+type MockSteamVideoGameDetailsGetterMockRecorder struct {
+	mock *MockSteamVideoGameDetailsGetter
+}
+
+// NewMockSteamVideoGameDetailsGetter creates a new mock instance.
+func NewMockSteamVideoGameDetailsGetter(ctrl *gomock.Controller) *MockSteamVideoGameDetailsGetter {
+	mock := &MockSteamVideoGameDetailsGetter{ctrl: ctrl}
+	mock.recorder = &MockSteamVideoGameDetailsGetterMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockSteamVideoGameDetailsGetter) EXPECT() *MockSteamVideoGameDetailsGetterMockRecorder {
+	return m.recorder
+}
+
+// GetSteamVideoGameDetails mocks base method.
+func (m *MockSteamVideoGameDetailsGetter) GetSteamVideoGameDetails(ctx context.Context, input *service.GetSteamVideoGameDetailsInput) (*service.GetSteamVideoGameDetailsOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetSteamVideoGameDetails", ctx, input)
+	ret0, _ := ret[0].(*service.GetSteamVideoGameDetailsOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetSteamVideoGameDetails indicates an expected call of GetSteamVideoGameDetails.
+func (mr *MockSteamVideoGameDetailsGetterMockRecorder) GetSteamVideoGameDetails(ctx, input any) *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall {
+	mr.mock.ctrl.T.Helper()
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSteamVideoGameDetails", reflect.TypeOf((*MockSteamVideoGameDetailsGetter)(nil).GetSteamVideoGameDetails), ctx, input)
+	return &MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall{Call: call}
+}
+
+// MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall wrap *gomock.Call
+type MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall struct {
+	*gomock.Call
+}
+
+// Return rewrite *gomock.Call.Return
+func (c *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall) Return(arg0 *service.GetSteamVideoGameDetailsOutput, arg1 error) *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall {
+	c.Call = c.Call.Return(arg0, arg1)
+	return c
+}
+
+// Do rewrite *gomock.Call.Do
+func (c *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall) Do(f func(context.Context, *service.GetSteamVideoGameDetailsInput) (*service.GetSteamVideoGameDetailsOutput, error)) *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall {
+	c.Call = c.Call.Do(f)
+	return c
+}
+
+// DoAndReturn rewrite *gomock.Call.DoAndReturn
+func (c *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall) DoAndReturn(f func(context.Context, *service.GetSteamVideoGameDetailsInput) (*service.GetSteamVideoGameDetailsOutput, error)) *MockSteamVideoGameDetailsGetterGetSteamVideoGameDetailsCall {
+	c.Call = c.Call.DoAndReturn(f)
+	return c
+}
