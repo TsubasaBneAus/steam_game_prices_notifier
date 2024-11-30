@@ -14,7 +14,7 @@ func TestNotionToTime(t *testing.T) {
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
 		defer cancel()
-		date := Date{
+		date := NotionDate{
 			Start: "2024-12-31",
 		}
 		if _, err := date.ToTime(ctx); err != nil {
@@ -40,7 +40,7 @@ func TestNotionToTime(t *testing.T) {
 			// Execute the method to be tested
 			ctx, cancel := context.WithCancel(context.Background())
 			defer cancel()
-			date := Date{
+			date := NotionDate{
 				Start: tc.date,
 			}
 			if _, err := date.ToTime(ctx); err == nil {

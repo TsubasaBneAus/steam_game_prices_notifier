@@ -10,119 +10,109 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/TsubasaBneAus/steam_game_price_notifier/app/model"
+	"github.com/TsubasaBneAus/steam_game_price_notifier/app/service"
 	"github.com/TsubasaBneAus/steam_game_price_notifier/config"
-	"github.com/TsubasaBneAus/steam_game_price_notifier/external/httpClient"
-	"github.com/TsubasaBneAus/steam_game_price_notifier/model"
 )
 
 const notionAPIURL string = "https://api.notion.com/v1"
 
-type (
-	GetWishlistInput struct{}
-
-	GetWishlistOutput struct {
-		WishlistItems *model.WishlistItems
-	}
-
-	WishlistGetter interface {
-		GetWishlist(ctx context.Context, input *GetWishlistInput) (*GetWishlistOutput, error)
-	}
-)
-
-type wishlistGetter struct {
-	cfg        *config.Envs
-	httpClient httpClient.HttpClient
+type notionWishlistGetter struct {
+	cfg        *config.NotionConfig
+	httpClient service.HTTPClient
 }
 
-var _ WishlistGetter = (*wishlistGetter)(nil)
+var _ service.NotionWishlistGetter = (*notionWishlistGetter)(nil)
 
-func NewWishlistGetter(cfg *config.Envs, httpClient httpClient.HttpClient) WishlistGetter {
-	return &wishlistGetter{
+// Generate a new NotionWishlistGetter
+func NewNotionWishlistGetter(
+	cfg *config.NotionConfig,
+	httpClient service.HTTPClient,
+) *notionWishlistGetter {
+	return &notionWishlistGetter{
 		cfg:        cfg,
 		httpClient: httpClient,
 	}
 }
 
-// Get Steam Wishlist from Notion database
-func (wg *wishlistGetter) GetWishlist(
+// Get a wishlist from the Notion DB
+func (g *notionWishlistGetter) GetNotionWishlist(
 	ctx context.Context,
-	input *GetWishlistInput,
-) (*GetWishlistOutput, error) {
-	reqURL, err := url.JoinPath(notionAPIURL, "databases", wg.cfg.NotionDatabaseID, "query")
+	input *service.GetNotionWishlistInput,
+) (*service.GetNotionWishlistOutput, error) {
+	reqURL, err := url.JoinPath(notionAPIURL, "databases", g.cfg.NotionDatabaseID, "query")
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to build a Notion API URL", slog.Any("error", err))
+
 		return nil, err
 	}
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, reqURL, nil)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
+
 		return nil, err
 	}
 
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", wg.cfg.NotionApiKey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", g.cfg.NotionAPIKey))
 	req.Header.Set("Notion-Version", "2022-06-28")
 
-	res, err := wg.httpClient.Do(req)
+	res, err := g.httpClient.Do(req)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to send a Notion API request", slog.Any("error", err))
+
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		slog.ErrorContext(ctx, "unexpected status code in the Notion API response", slog.Any("status_code", res.StatusCode))
+		slog.ErrorContext(ctx, "unexpected status code in a Notion API response", slog.Any("status_code", res.StatusCode))
+
 		return nil, errUnexpectedStatusCode
 	}
 
 	buffer := bytes.Buffer{}
 	if _, err := io.Copy(&buffer, res.Body); err != nil {
-		slog.ErrorContext(ctx, "failed to read Notion API response", slog.Any("error", err))
+		slog.ErrorContext(ctx, "failed to read a Notion API response", slog.Any("error", err))
+
 		return nil, err
 	}
 
-	wishlistItems := &model.WishlistItems{}
+	wishlistItems := &model.NotionWishlistItems{}
 	if err := json.Unmarshal(buffer.Bytes(), wishlistItems); err != nil {
 		slog.ErrorContext(ctx, "failed to unmarshal a Notion API response", slog.Any("error", err))
+
 		return nil, err
 	}
 
-	return &GetWishlistOutput{
+	return &service.GetNotionWishlistOutput{
 		WishlistItems: wishlistItems,
 	}, nil
 }
 
-type (
-	UpdateWishlistInput struct {
-		WishlistItem *model.WishlistItem
-	}
-
-	UpdateWishlistOutput struct{}
-
-	WishlistUpdater interface {
-		UpdateWishlist(ctx context.Context, input *UpdateWishlistInput) (*UpdateWishlistOutput, error)
-	}
-)
-
-type wishlistUpdater struct {
-	cfg        *config.Envs
-	httpClient httpClient.HttpClient
+type notionWishlistItemUpdater struct {
+	cfg        *config.NotionConfig
+	httpClient service.HTTPClient
 }
 
-var _ WishlistUpdater = (*wishlistUpdater)(nil)
+var _ service.NotionWishlistItemUpdater = (*notionWishlistItemUpdater)(nil)
 
-func NewWishlistUpdater(cfg *config.Envs, httpClient httpClient.HttpClient) WishlistUpdater {
-	return &wishlistUpdater{
+// Generate a new NotionWishlistItemUpdater
+func NewNotionWishlistItemUpdater(
+	cfg *config.NotionConfig,
+	httpClient service.HTTPClient,
+) *notionWishlistItemUpdater {
+	return &notionWishlistItemUpdater{
 		cfg:        cfg,
 		httpClient: httpClient,
 	}
 }
 
-// Update Steam Wishlist in Notion database
-func (wu *wishlistUpdater) UpdateWishlist(
+// Update a wishlist item in Notion DB
+func (u *notionWishlistItemUpdater) UpdateNotionWishlistItem(
 	ctx context.Context,
-	input *UpdateWishlistInput,
-) (*UpdateWishlistOutput, error) {
+	input *service.UpdateNotionWishlistItemInput,
+) (*service.UpdateNotionWishlistItemOutput, error) {
 	reqURL, err := url.JoinPath(notionAPIURL, "pages", string(input.WishlistItem.ID))
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to build a Notion API URL", slog.Any("error", err))
@@ -143,11 +133,11 @@ func (wu *wishlistUpdater) UpdateWishlist(
 		return nil, err
 	}
 
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", wu.cfg.NotionApiKey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", u.cfg.NotionAPIKey))
 	req.Header.Set("Notion-Version", "2022-06-28")
 	req.Header.Set("Content-Type", "application/json")
 
-	res, err := wu.httpClient.Do(req)
+	res, err := u.httpClient.Do(req)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to send a Notion API request", slog.Any("error", err))
 		return nil, err
@@ -155,9 +145,13 @@ func (wu *wishlistUpdater) UpdateWishlist(
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		slog.ErrorContext(ctx, "unexpected status code in the Notion API response", slog.Any("status_code", res.StatusCode))
+		slog.ErrorContext(
+			ctx,
+			"unexpected status code in a Notion API response",
+			slog.Any("status_code", res.StatusCode),
+		)
 		return nil, errUnexpectedStatusCode
 	}
 
-	return &UpdateWishlistOutput{}, nil
+	return &service.UpdateNotionWishlistItemOutput{}, nil
 }
