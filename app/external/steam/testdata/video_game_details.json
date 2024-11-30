@@ -1,0 +1,286 @@
+{
+  "2701660": {
+    "success": true,
+    "data": {
+      "type": "game",
+      "name": "DRAGON QUEST III HD-2D Remake",
+      "steam_appid": 2701660,
+      "required_age": 0,
+      "is_free": false,
+      "detailed_description": "<p class=\"bb_paragraph\"><img class=\"bb_img\" src=\"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/extras/NICOLA_Accolades_616x400.jpg?t=1732735899\" /><br><br>DRAGON QUEST III HD-2D Remake is a stunning reimagining of the beloved masterpiece and narrative beginning to The Erdrick Trilogy.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Story:</h2><p class=\"bb_paragraph\">Years ago, the great hero Ortega bid farewell to his wife and child as he set off on a quest to defeat the villainous Archfiend, Baramos. Ortega failed his quest, and Baramos still threatens the world. Now, on their sixteenth birthday, Ortega’s only child is summoned by the king of Aliahan and entrusted with a mission of the highest import: to take on Ortega’s quest, vanquish Baramos, and save the world.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Build your perfect party:</h2><p class=\"bb_paragraph\">Recruit a variety of allies, with three able to join your party to aid you on your quest. Choose their vocations, appearances and their voices. There's even a brand new vocation exclusive to this remake: the monster wrangler!</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Travel across an expansive open world:</h2><p class=\"bb_paragraph\">Explore a wealth of towns, castles, caves, towers and dungeons to explore on your adventure, with hidden secrets waiting to be discovered.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Strategic, turn-based battles:</h2><p class=\"bb_paragraph\">Battle a vast array of monsters in classic DRAGON QUEST turn-based battles. Set party tactics and switch up weapons, abilities and spells to take on all of the challenging foes that await you.</p>",
+      "about_the_game": "<p class=\"bb_paragraph\"><img class=\"bb_img\" src=\"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/extras/NICOLA_Accolades_616x400.jpg?t=1732735899\" /><br><br>DRAGON QUEST III HD-2D Remake is a stunning reimagining of the beloved masterpiece and narrative beginning to The Erdrick Trilogy.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Story:</h2><p class=\"bb_paragraph\">Years ago, the great hero Ortega bid farewell to his wife and child as he set off on a quest to defeat the villainous Archfiend, Baramos. Ortega failed his quest, and Baramos still threatens the world. Now, on their sixteenth birthday, Ortega’s only child is summoned by the king of Aliahan and entrusted with a mission of the highest import: to take on Ortega’s quest, vanquish Baramos, and save the world.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Build your perfect party:</h2><p class=\"bb_paragraph\">Recruit a variety of allies, with three able to join your party to aid you on your quest. Choose their vocations, appearances and their voices. There's even a brand new vocation exclusive to this remake: the monster wrangler!</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Travel across an expansive open world:</h2><p class=\"bb_paragraph\">Explore a wealth of towns, castles, caves, towers and dungeons to explore on your adventure, with hidden secrets waiting to be discovered.</p><p class=\"bb_paragraph\"></p><h2 class=\"bb_tag\">Strategic, turn-based battles:</h2><p class=\"bb_paragraph\">Battle a vast array of monsters in classic DRAGON QUEST turn-based battles. Set party tactics and switch up weapons, abilities and spells to take on all of the challenging foes that await you.</p>",
+      "short_description": "DRAGON QUEST III HD-2D Remake is a stunning reimagining of the beloved masterpiece and narrative beginning to The Erdrick Trilogy.",
+      "supported_languages": "French, Italian, German, Spanish - Spain, Spanish - Latin America, Simplified Chinese, Traditional Chinese, Japanese<strong>*</strong>, Korean, English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+      "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/header.jpg?t=1732735899",
+      "capsule_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/capsule_231x87.jpg?t=1732735899",
+      "capsule_imagev5": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/capsule_184x69.jpg?t=1732735899",
+      "website": "https://dragonquest.square-enix-games.com/games/en-us/dragon-quest-123-hd2d-remakes/",
+      "pc_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows® 10 / Windows® 11 64-bit<br></li><li><strong>Processor:</strong> AMD Ryzen™ 3 1200 / Intel® Core™ i3-6100<br></li><li><strong>Memory:</strong> 8 GB RAM<br></li><li><strong>Graphics:</strong> AMD Radeon™ RX 460 / Intel® Arc™ A380 / NVIDIA® GeForce® GTX 750<br></li><li><strong>DirectX:</strong> Version 12<br></li><li><strong>Storage:</strong> 20 GB available space<br></li><li><strong>Additional Notes:</strong> 1280x720, Graphics Preset &quot;Lowest&quot;, 60FPS. 16GB RAM required when using Intel Arc GPU.</li></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"><li>Requires a 64-bit processor and operating system<br></li><li><strong>OS:</strong> Windows® 10 / Windows® 11 64-bit<br></li><li><strong>Processor:</strong> AMD Ryzen™ 3 1200 / Intel® Core™ i3-6100<br></li><li><strong>Memory:</strong> 8 GB RAM<br></li><li><strong>Graphics:</strong> AMD Radeon™ RX 470 / Intel® Arc™ A580 / NVIDIA® GeForce® GTX 1060<br></li><li><strong>DirectX:</strong> Version 12<br></li><li><strong>Storage:</strong> 20 GB available space<br></li><li><strong>Additional Notes:</strong> 1920x1080, Graphics Preset &quot;Highest&quot;, 60FPS. 16GB RAM required when using Intel Arc GPU.</li></ul>"
+      },
+      "mac_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"></ul>"
+      },
+      "linux_requirements": {
+        "minimum": "<strong>Minimum:</strong><br><ul class=\"bb_ul\"></ul>",
+        "recommended": "<strong>Recommended:</strong><br><ul class=\"bb_ul\"></ul>"
+      },
+      "legal_notice": "© ARMOR PROJECT/BIRD STUDIO/SPIKE CHUNSOFT/SQUARE ENIX,  © SUGIYAMA KOBO, ℗ SUGIYAMA KOBO",
+      "drm_notice": "Denuvo Anti-tamper",
+      "developers": ["Square Enix", "ARTDINK"],
+      "publishers": ["Square Enix"],
+      "price_overview": {
+        "currency": "JPY",
+        "initial": 767800,
+        "final": 767800,
+        "discount_percent": 0,
+        "initial_formatted": "",
+        "final_formatted": "¥ 7,678"
+      },
+      "packages": [1081375],
+      "package_groups": [
+        {
+          "name": "default",
+          "title": "Buy DRAGON QUEST III HD-2D Remake",
+          "description": "",
+          "selection_text": "Select a purchase option",
+          "save_text": "",
+          "display_type": 0,
+          "is_recurring_subscription": "false",
+          "subs": [
+            {
+              "packageid": 1081375,
+              "percent_savings_text": " ",
+              "percent_savings": 0,
+              "option_text": "DRAGON QUEST III HD-2D Remake - ¥ 7,678",
+              "option_description": "",
+              "can_get_free_license": "0",
+              "is_free_license": false,
+              "price_in_cents_with_discount": 767800
+            }
+          ]
+        }
+      ],
+      "platforms": {
+        "windows": true,
+        "mac": false,
+        "linux": false
+      },
+      "categories": [
+        {
+          "id": 2,
+          "description": "Single-player"
+        },
+        {
+          "id": 22,
+          "description": "Steam Achievements"
+        },
+        {
+          "id": 29,
+          "description": "Steam Trading Cards"
+        },
+        {
+          "id": 18,
+          "description": "Partial Controller Support"
+        },
+        {
+          "id": 23,
+          "description": "Steam Cloud"
+        },
+        {
+          "id": 62,
+          "description": "Family Sharing"
+        }
+      ],
+      "genres": [
+        {
+          "id": "3",
+          "description": "RPG"
+        }
+      ],
+      "screenshots": [
+        {
+          "id": 0,
+          "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_6a3f03791fade14a9a7a6abd022b31d4b28ff7cb.600x338.jpg?t=1732735899",
+          "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_6a3f03791fade14a9a7a6abd022b31d4b28ff7cb.1920x1080.jpg?t=1732735899"
+        },
+        {
+          "id": 1,
+          "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_01b76fe1eccbd2bfb27759c9413b0577e89afdb6.600x338.jpg?t=1732735899",
+          "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_01b76fe1eccbd2bfb27759c9413b0577e89afdb6.1920x1080.jpg?t=1732735899"
+        },
+        {
+          "id": 2,
+          "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_521b3bc526f705ab9727667209097e6e0a8780f8.600x338.jpg?t=1732735899",
+          "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_521b3bc526f705ab9727667209097e6e0a8780f8.1920x1080.jpg?t=1732735899"
+        },
+        {
+          "id": 3,
+          "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_2864b8a4a84e3d9669bf6c5961107521d3899d15.600x338.jpg?t=1732735899",
+          "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_2864b8a4a84e3d9669bf6c5961107521d3899d15.1920x1080.jpg?t=1732735899"
+        },
+        {
+          "id": 4,
+          "path_thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_ee173d6528989c3f62eb0d0d9fcf089bc665fd80.600x338.jpg?t=1732735899",
+          "path_full": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/ss_ee173d6528989c3f62eb0d0d9fcf089bc665fd80.1920x1080.jpg?t=1732735899"
+        }
+      ],
+      "movies": [
+        {
+          "id": 257069906,
+          "name": "PEGI EN Launch Trailer",
+          "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257069906/415711a2431839faeb772972f0f6c3ef9f0d51f4/movie_600x337.jpg?t=1731603393",
+          "webm": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257069906/movie480_vp9.webm?t=1731603393",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257069906/movie_max_vp9.webm?t=1731603393"
+          },
+          "mp4": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257069906/movie480.mp4?t=1731603393",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257069906/movie_max.mp4?t=1731603393"
+          },
+          "highlight": true
+        },
+        {
+          "id": 257031261,
+          "name": "PEGI EN Announce",
+          "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257031261/movie.293x165.jpg?t=1718726296",
+          "webm": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257031261/movie480_vp9.webm?t=1718726296",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257031261/movie_max_vp9.webm?t=1718726296"
+          },
+          "mp4": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257031261/movie480.mp4?t=1718726296",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257031261/movie_max.mp4?t=1718726296"
+          },
+          "highlight": true
+        },
+        {
+          "id": 257063777,
+          "name": "PEGI EN Gameplay",
+          "thumbnail": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/257063777/f47340efbe84db0887fc06bb7dffdb30d4cf3991/movie_600x337.jpg?t=1729013211",
+          "webm": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257063777/movie480_vp9.webm?t=1729013211",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257063777/movie_max_vp9.webm?t=1729013211"
+          },
+          "mp4": {
+            "480": "http://video.akamai.steamstatic.com/store_trailers/257063777/movie480.mp4?t=1729013211",
+            "max": "http://video.akamai.steamstatic.com/store_trailers/257063777/movie_max.mp4?t=1729013211"
+          },
+          "highlight": false
+        }
+      ],
+      "recommendations": {
+        "total": 2018
+      },
+      "achievements": {
+        "total": 42,
+        "highlighted": [
+          {
+            "name": "A Legend Is Born",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/3a09b8be2704d57e067ebfb64976638e24027324.jpg"
+          },
+          {
+            "name": "Adventure Underway",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/c70719acac33500bcd736b30a4dde3b0b259bdf8.jpg"
+          },
+          {
+            "name": "The World Awaits",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/a9b2dbcf032338b9a009a8be654a6725586bbfc7.jpg"
+          },
+          {
+            "name": "Dishonourable Defeat",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/cc22697d3688a82f0bad88c4de1add21f4165a00.jpg"
+          },
+          {
+            "name": "Ripper Ripped",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/edbfa11e5b39678aa359ecb1aff70e62013a41fa.jpg"
+          },
+          {
+            "name": "Double Defeat",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/7e354d7ba0f5f0f285958e4ee27471acdd30b958.jpg"
+          },
+          {
+            "name": "Sea Legs",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/8e1909ecdf48b145b9c80b7283b41827a5ad5733.jpg"
+          },
+          {
+            "name": "Orochi Ousted",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/f048c49dd2802f5597713ab64ab5ad068bada577.jpg"
+          },
+          {
+            "name": "Chiromassacre",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/0ad1cb09f6feb5d705ea35313080a8a014a92804.jpg"
+          },
+          {
+            "name": "Playing with the Dead",
+            "path": "https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/2701660/5f7c9f17e5cdc54e460dc4dfd1cd9b08c61e37f3.jpg"
+          }
+        ]
+      },
+      "release_date": {
+        "coming_soon": false,
+        "date": "14 Nov, 2024"
+      },
+      "support_info": {
+        "url": "https://support.square-enix-games.com/",
+        "email": ""
+      },
+      "background": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/page_bg_generated_v6b.jpg?t=1732735899",
+      "background_raw": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2701660/page.bg.jpg?t=1732735899",
+      "content_descriptors": {
+        "ids": [],
+        "notes": null
+      },
+      "ratings": {
+        "esrb": {
+          "rating": "e10",
+          "descriptors": "Fantasy Violence\r\nSuggestive Themes\r\nMild Blood\r\nAlcohol Reference\r\nMild Language"
+        },
+        "csrr": {
+          "rating": "C12",
+          "descriptors": "性\r\n暴力"
+        },
+        "cero": {
+          "rating": "b",
+          "descriptors": "[img]http://media.steampowered.com/store/Ratings/CERO/sexual_content.png[/img]\r\n[img]http://media.steampowered.com/store/Ratings/CERO/crime.png[/img]"
+        },
+        "dejus": {
+          "rating": "12",
+          "descriptors": "Violência\r\nConteúdo Sexual"
+        },
+        "pegi": {
+          "rating": "12",
+          "descriptors": "Violence",
+          "use_age_gate": "true",
+          "required_age": "12"
+        },
+        "usk": {
+          "rating": "12",
+          "rating_id": "55523/24"
+        },
+        "oflc": {
+          "rating": "pg",
+          "descriptors": "Mild fantasy themes\r\nViolence\r\nSexual references\r\nOccasional coarse language"
+        },
+        "crl": {
+          "rating": "12",
+          "descriptors": "Violence"
+        },
+        "kgrb": {
+          "rating": "12",
+          "descriptors": "선정성\r\n폭력성"
+        },
+        "steam_germany": {
+          "rating_generated": "1",
+          "rating": "12",
+          "required_age": "12",
+          "banned": "0",
+          "use_age_gate": "0",
+          "descriptors": "Sexuelle Andeutungen\nGewalt\nAlkohol / Tabak"
+        }
+      }
+    }
+  }
+}
