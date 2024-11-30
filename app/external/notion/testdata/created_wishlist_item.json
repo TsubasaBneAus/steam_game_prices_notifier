@@ -1,0 +1,73 @@
+{
+  "parent": {
+    "type": "database_id",
+    "database_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+  },
+  "properties": {
+    "Current Price": {
+      "id": "PHrn",
+      "type": "number",
+      "number": 7678
+    },
+    "Name": {
+      "id": "V%5DhB",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "ドラゴンクエストIII　そして伝説へ…",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "ドラゴンクエストIII　そして伝説へ…",
+          "href": null
+        }
+      ]
+    },
+    "Release Date": {
+      "id": "%5CfKe",
+      "type": "date",
+      "date": {
+        "start": "2024-11-15",
+        "end": null,
+        "time_zone": null
+      }
+    },
+    "Lowest Price": {
+      "id": "tVuT",
+      "type": "number",
+      "number": 7678
+    },
+    "App ID": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "2701660",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2701660",
+          "href": null
+        }
+      ]
+    }
+  }
+}
