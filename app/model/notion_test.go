@@ -17,8 +17,13 @@ func TestNotionToTime(t *testing.T) {
 		date := NotionDate{
 			Start: "2024-12-31",
 		}
-		if _, err := date.ToTime(ctx); err != nil {
+		got, err := date.ToTime(ctx)
+		if err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
+		}
+		want := "2024-12-31 00:00:00 +0900 JST"
+		if got.String() != want {
+			t.Errorf("\ngot: %v\nwant: %v", got, want)
 		}
 	})
 
