@@ -79,3 +79,66 @@ func (c *MockVideoGamePricesOnDiscordNotifierNotifyVideoGamePricesOnDiscordCall)
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }
+
+// MockErrorOnDiscordNotifier is a mock of ErrorOnDiscordNotifier interface.
+type MockErrorOnDiscordNotifier struct {
+	ctrl     *gomock.Controller
+	recorder *MockErrorOnDiscordNotifierMockRecorder
+	isgomock struct{}
+}
+
+// MockErrorOnDiscordNotifierMockRecorder is the mock recorder for MockErrorOnDiscordNotifier.
+type MockErrorOnDiscordNotifierMockRecorder struct {
+	mock *MockErrorOnDiscordNotifier
+}
+
+// NewMockErrorOnDiscordNotifier creates a new mock instance.
+func NewMockErrorOnDiscordNotifier(ctrl *gomock.Controller) *MockErrorOnDiscordNotifier {
+	mock := &MockErrorOnDiscordNotifier{ctrl: ctrl}
+	mock.recorder = &MockErrorOnDiscordNotifierMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockErrorOnDiscordNotifier) EXPECT() *MockErrorOnDiscordNotifierMockRecorder {
+	return m.recorder
+}
+
+// NotifyErrorOnDiscord mocks base method.
+func (m *MockErrorOnDiscordNotifier) NotifyErrorOnDiscord(ctx context.Context, input *service.NotifyErrorOnDiscordInput) (*service.NotifyErrorOnDiscordOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "NotifyErrorOnDiscord", ctx, input)
+	ret0, _ := ret[0].(*service.NotifyErrorOnDiscordOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// NotifyErrorOnDiscord indicates an expected call of NotifyErrorOnDiscord.
+func (mr *MockErrorOnDiscordNotifierMockRecorder) NotifyErrorOnDiscord(ctx, input any) *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall {
+	mr.mock.ctrl.T.Helper()
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NotifyErrorOnDiscord", reflect.TypeOf((*MockErrorOnDiscordNotifier)(nil).NotifyErrorOnDiscord), ctx, input)
+	return &MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall{Call: call}
+}
+
+// MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall wrap *gomock.Call
+type MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall struct {
+	*gomock.Call
+}
+
+// Return rewrite *gomock.Call.Return
+func (c *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall) Return(arg0 *service.NotifyErrorOnDiscordOutput, arg1 error) *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall {
+	c.Call = c.Call.Return(arg0, arg1)
+	return c
+}
+
+// Do rewrite *gomock.Call.Do
+func (c *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall) Do(f func(context.Context, *service.NotifyErrorOnDiscordInput) (*service.NotifyErrorOnDiscordOutput, error)) *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall {
+	c.Call = c.Call.Do(f)
+	return c
+}
+
+// DoAndReturn rewrite *gomock.Call.DoAndReturn
+func (c *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall) DoAndReturn(f func(context.Context, *service.NotifyErrorOnDiscordInput) (*service.NotifyErrorOnDiscordOutput, error)) *MockErrorOnDiscordNotifierNotifyErrorOnDiscordCall {
+	c.Call = c.Call.DoAndReturn(f)
+	return c
+}

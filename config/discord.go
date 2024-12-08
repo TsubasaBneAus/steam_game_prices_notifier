@@ -9,7 +9,8 @@ import (
 
 // A struct to store the configuration for Discord
 type DiscordConfig struct {
-	DiscordWebhookURL string `env:"DISCORD_WEBHOOK_URL,notEmpty"`
+	DiscordWebhookID    string `env:"DISCORD_WEBHOOK_ID,notEmpty"`
+	DiscordWebhookToken string `env:"DISCORD_WEBHOOK_TOKEN,notEmpty"`
 }
 
 // Generate configuration for the Discord

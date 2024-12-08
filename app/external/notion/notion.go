@@ -43,14 +43,12 @@ func (g *notionWishlistGetter) GetNotionWishlist(
 	reqURL, err := url.JoinPath(notionAPIURL, "databases", g.cfg.NotionDatabaseID, "query")
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to build a Notion API URL", slog.Any("error", err))
-
 		return nil, err
 	}
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, reqURL, nil)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
-
 		return nil, err
 	}
 
@@ -60,28 +58,24 @@ func (g *notionWishlistGetter) GetNotionWishlist(
 	res, err := g.httpClient.Do(req)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to send a Notion API request", slog.Any("error", err))
-
 		return nil, err
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
 		slog.ErrorContext(ctx, "unexpected status code in a Notion API response", slog.Any("status_code", res.StatusCode))
-
 		return nil, errUnexpectedStatusCode
 	}
 
 	buffer := bytes.Buffer{}
 	if _, err := io.Copy(&buffer, res.Body); err != nil {
 		slog.ErrorContext(ctx, "failed to read a Notion API response", slog.Any("error", err))
-
 		return nil, err
 	}
 
 	wishlistItems := &model.NotionWishlistItems{}
 	if err := json.Unmarshal(buffer.Bytes(), wishlistItems); err != nil {
 		slog.ErrorContext(ctx, "failed to unmarshal a Notion API response", slog.Any("error", err))
-
 		return nil, err
 	}
 

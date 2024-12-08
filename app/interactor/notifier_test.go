@@ -218,7 +218,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			input := &service.NotifyVideoGamePricesOnDiscordInput{
 				DiscordContents: map[model.SteamAppID]*model.DiscordContent{
 					1: {
-						GameTitle:    "Title1",
+						Title:        "Title1",
 						CurrentPrice: 1000,
 						LowestPrice:  1500,
 					},
@@ -251,7 +251,6 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		sVGGetter := steam.NewMockSteamVideoGameDetailsGetter(ctrl)
 		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
 		nWIUpdater := notion.NewMockNotionWishlistItemUpdater(ctrl)
-		vGPODNotifier := discord.NewMockVideoGamePricesOnDiscordNotifier(ctrl)
 		{
 			input := &service.GetSteamWishlistInput{}
 			output := &service.GetSteamWishlistOutput{
@@ -372,13 +371,6 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			output := &service.UpdateNotionWishlistItemOutput{}
 			nWIUpdater.EXPECT().UpdateNotionWishlistItem(gomock.Any(), input).Return(output, nil)
 		}
-		{
-			input := &service.NotifyVideoGamePricesOnDiscordInput{
-				DiscordContents: map[model.SteamAppID]*model.DiscordContent{},
-			}
-			output := &service.NotifyVideoGamePricesOnDiscordOutput{}
-			vGPODNotifier.EXPECT().NotifyVideoGamePricesOnDiscord(gomock.Any(), input).Return(output, nil)
-		}
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -387,7 +379,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, vGPODNotifier)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, err := n.NotifyVideoGamePrices(ctx, input); err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
@@ -403,7 +395,6 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		sVGGetter := steam.NewMockSteamVideoGameDetailsGetter(ctrl)
 		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
 		nWIUpdater := notion.NewMockNotionWishlistItemUpdater(ctrl)
-		vGPODNotifier := discord.NewMockVideoGamePricesOnDiscordNotifier(ctrl)
 		{
 			input := &service.GetSteamWishlistInput{}
 			output := &service.GetSteamWishlistOutput{
@@ -524,13 +515,6 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			output := &service.UpdateNotionWishlistItemOutput{}
 			nWIUpdater.EXPECT().UpdateNotionWishlistItem(gomock.Any(), input).Return(output, nil)
 		}
-		{
-			input := &service.NotifyVideoGamePricesOnDiscordInput{
-				DiscordContents: map[model.SteamAppID]*model.DiscordContent{},
-			}
-			output := &service.NotifyVideoGamePricesOnDiscordOutput{}
-			vGPODNotifier.EXPECT().NotifyVideoGamePricesOnDiscord(gomock.Any(), input).Return(output, nil)
-		}
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -539,7 +523,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, vGPODNotifier)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, err := n.NotifyVideoGamePrices(ctx, input); err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
@@ -1064,7 +1048,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			input := &service.NotifyVideoGamePricesOnDiscordInput{
 				DiscordContents: map[model.SteamAppID]*model.DiscordContent{
 					1: {
-						GameTitle:    "Title1",
+						Title:        "Title1",
 						CurrentPrice: 1000,
 						LowestPrice:  1500,
 					},
