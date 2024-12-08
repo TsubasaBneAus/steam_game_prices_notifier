@@ -23,7 +23,7 @@ jobs:
           go-version-file: "./go.mod"
 
       - name: Run tests with the coverage output
-        run: go test -v -shuffle on ./... -coverprofile=coverage.out
+        run: go test -v -race -shuffle on ./... -coverprofile=coverage.out
 
       - name: Create a coverage report
         uses: k1LoW/octocov-action@v1
