@@ -79,6 +79,11 @@ func (n *videoGamePricesNotifier) NotifyVideoGamePrices(
 		return nil, err
 	}
 
+	// Terminate processing if there are no video game prices to notify
+	if len(discordContents) == 0 {
+		return &usecase.NotifyVideoGamePricesOutput{}, nil
+	}
+
 	// Notify video game prices on Discord
 	vGPODInput := &service.NotifyVideoGamePricesOnDiscordInput{
 		DiscordContents: discordContents,
@@ -313,7 +318,7 @@ func (n *videoGamePricesNotifier) updateNotionWishlistItems(
 				lowestPrice = nil
 			} else if *convertedNWishList[i].Properties.LowestPrice.Number > *currentPrice {
 				discordContents[i] = &model.DiscordContent{
-					GameTitle:    v.Title,
+					Title:        v.Title,
 					CurrentPrice: *currentPrice,
 					LowestPrice:  *convertedNWishList[i].Properties.LowestPrice.Number,
 				}

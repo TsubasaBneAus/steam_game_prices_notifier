@@ -8,7 +8,8 @@ import (
 func TestNewDiscordConfig(t *testing.T) {
 	t.Run("Positive case:  Successfully load configuration for Discord", func(t *testing.T) {
 		// Set environment variables
-		t.Setenv("DISCORD_WEBHOOK_URL", "dummy_discord_webhook_url")
+		t.Setenv("DISCORD_WEBHOOK_ID", "dummy_discord_webhook_id")
+		t.Setenv("DISCORD_WEBHOOK_TOKEN", "dummy_discord_webhook_token")
 
 		// Execute the function to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -20,7 +21,8 @@ func TestNewDiscordConfig(t *testing.T) {
 
 	t.Run("Negative case: Environment variables are missing or empty", func(t *testing.T) {
 		// Set environment variables
-		t.Setenv("DISCORD_WEBHOOK_URL", "")
+		t.Setenv("DISCORD_WEBHOOK_ID", "")
+		t.Setenv("DISCORD_WEBHOOK_TOKEN", "")
 
 		// Execute the function to be tested
 		ctx, cancel := context.WithCancel(context.Background())

@@ -25,3 +25,21 @@ type (
 		) (*NotifyVideoGamePricesOnDiscordOutput, error)
 	}
 )
+
+type (
+	// An input to notify an error on Discord
+	NotifyErrorOnDiscordInput struct {
+		GeneratedError error
+	}
+
+	// An output to notify an error on Discord
+	NotifyErrorOnDiscordOutput struct{}
+
+	// An interface to notify an error on Discord
+	ErrorOnDiscordNotifier interface {
+		NotifyErrorOnDiscord(
+			ctx context.Context,
+			input *NotifyErrorOnDiscordInput,
+		) (*NotifyErrorOnDiscordOutput, error)
+	}
+)
