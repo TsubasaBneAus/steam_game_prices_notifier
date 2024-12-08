@@ -38,8 +38,12 @@ type SteamCurrentPrice struct {
 	Number json.Number
 }
 
-// Convert json.Number into uint64
-func (p *SteamCurrentPrice) ToUint64(ctx context.Context) (*uint64, error) {
+// Convert the current price format
+//
+// [FYI]
+// Retrieved price contains decimal places
+// e.g. 100000 -> 1000 (JPY)
+func (p *SteamCurrentPrice) ConvertPriceFormat(ctx context.Context) (*uint64, error) {
 	currentPrice, err := p.Number.Int64()
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to convert the current price to int64", slog.Any("error", err))
@@ -47,10 +51,6 @@ func (p *SteamCurrentPrice) ToUint64(ctx context.Context) (*uint64, error) {
 	}
 
 	// Remove the last two digits
-	//
-	// [FYI]
-	// Retrieved price contains decimal places
-	// e.g. 100000 -> 1000 (JPY)
 	convertedPrice := uint64(currentPrice) / 100
 
 	return &convertedPrice, nil
@@ -68,9 +68,9 @@ func (d *SteamReleaseDate) ToTime(ctx context.Context) (*time.Time, error) {
 		slog.ErrorContext(ctx, "failed to load location", slog.Any("error", err))
 		return nil, err
 	}
-	parsedTime, err := time.ParseInLocation("02 Jan, 2006", d.Date, loc)
+	parsedTime, err := time.ParseInLocation("2 Jan, 2006", d.Date, loc)
 	if err != nil {
-		slog.ErrorContext(ctx, "failed to parse string to time.Time", slog.Any("error", err))
+		slog.WarnContext(ctx, "failed to parse string to time.Time", slog.Any("error", err))
 		return nil, err
 	}
 
