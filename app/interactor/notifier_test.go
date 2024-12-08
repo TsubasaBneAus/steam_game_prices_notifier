@@ -1071,3 +1071,69 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 	})
 }
+
+func TestNotifyErrorOnDiscord(t *testing.T) {
+	t.Parallel()
+
+	t.Run("Positive case: Successfully notify an error on Discord", func(t *testing.T) {
+		t.Parallel()
+
+		// Create a mock
+		ctrl := gomock.NewController(t)
+		dENotifier := discord.NewMockErrorOnDiscordNotifier(ctrl)
+		generatedErr := errors.New("generated error")
+		{
+			input := &service.NotifyErrorOnDiscordInput{
+				GeneratedError: generatedErr,
+			}
+			output := &service.NotifyErrorOnDiscordOutput{}
+			dENotifier.EXPECT().NotifyErrorOnDiscord(gomock.Any(), input).Return(output, nil)
+		}
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.DiscordConfig{
+			DiscordWebhookID:    "dummy-discord-webhook-id",
+			DiscordWebhookToken: "dummy-discord-webhook-token",
+		}
+		n := NewErrorOnDiscordNotifier(cfg, dENotifier)
+		input := &usecase.NotifyErrorInput{
+			GeneratedError: generatedErr,
+		}
+		if _, err := n.NotifyError(ctx, input); err != nil {
+			t.Errorf("\ngot: %v\nwant: %v", err, nil)
+		}
+	})
+
+	t.Run("Negative case: Failed to notify an error on Discord", func(t *testing.T) {
+		t.Parallel()
+
+		// Create a mock
+		ctrl := gomock.NewController(t)
+		dENotifier := discord.NewMockErrorOnDiscordNotifier(ctrl)
+		generatedErr := errors.New("generated error")
+		wantErr := errors.New("unexpected error")
+		{
+			input := &service.NotifyErrorOnDiscordInput{
+				GeneratedError: generatedErr,
+			}
+			dENotifier.EXPECT().NotifyErrorOnDiscord(gomock.Any(), input).Return(nil, wantErr)
+		}
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.DiscordConfig{
+			DiscordWebhookID:    "dummy-discord-webhook-id",
+			DiscordWebhookToken: "dummy-discord-webhook-token",
+		}
+		n := NewErrorOnDiscordNotifier(cfg, dENotifier)
+		input := &usecase.NotifyErrorInput{
+			GeneratedError: generatedErr,
+		}
+		if _, gotErr := n.NotifyError(ctx, input); !errors.Is(gotErr, wantErr) {
+			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
+		}
+	})
+}
