@@ -192,16 +192,23 @@ func (vg *steamVideoGameDetailsGetter) GetSteamVideoGameDetails(
 	// Extract the data from the response
 	appID := videoGameDetails[strconv.FormatUint(uint64(input.AppID), 10)].(map[string]any)
 	data := appID["data"].(map[string]any)
-	priceOverview := data["price_overview"].(map[string]interface{})
 	releaseDate := data["release_date"].(map[string]any)
+
+	steamCurrentPrice := &model.SteamCurrentPrice{}
+	if data["price_overview"] == nil {
+		// The current price of a video game is set to nil if the price is not available
+		// e.g. free-to-play games, bundle games, games that are not sold yet, etc.
+		steamCurrentPrice = nil
+	} else {
+		priceOverview := data["price_overview"].(map[string]any)
+		steamCurrentPrice.Number = priceOverview["final"].(json.Number)
+	}
 
 	return &service.GetSteamVideoGameDetailsOutput{
 		VideoGameDetails: &model.SteamStoreVideoGameDetails{
-			AppID: input.AppID,
-			Title: data["name"].(string),
-			CurrentPrice: &model.SteamCurrentPrice{
-				Number: priceOverview["final"].(json.Number),
-			},
+			AppID:        input.AppID,
+			Title:        data["name"].(string),
+			CurrentPrice: steamCurrentPrice,
 			ReleaseDate: &model.SteamReleaseDate{
 				Date: releaseDate["date"].(string),
 			},
