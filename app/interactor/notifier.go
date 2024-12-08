@@ -414,3 +414,37 @@ func (n *videoGamePricesNotifier) convertReleaseDate(
 		Start: convertedDate.Format(time.DateOnly),
 	}
 }
+
+type errorOnDiscordNotifier struct {
+	cfg         *config.DiscordConfig
+	eODNotifier service.ErrorOnDiscordNotifier
+}
+
+var _ usecase.ErrorNotifier = (*errorOnDiscordNotifier)(nil)
+
+// Generate a new errorOnDiscordNotifier
+func NewErrorOnDiscordNotifier(
+	cfg *config.DiscordConfig,
+	eODNotifier service.ErrorOnDiscordNotifier,
+) *errorOnDiscordNotifier {
+	return &errorOnDiscordNotifier{
+		cfg:         cfg,
+		eODNotifier: eODNotifier,
+	}
+}
+
+// Notify an error on Discord
+func (n *errorOnDiscordNotifier) NotifyError(
+	ctx context.Context,
+	input *usecase.NotifyErrorInput,
+) (*usecase.NotifyErrorOutput, error) {
+	eODInput := &service.NotifyErrorOnDiscordInput{
+		GeneratedError: input.GeneratedError,
+	}
+	if _, err := n.eODNotifier.NotifyErrorOnDiscord(ctx, eODInput); err != nil {
+		slog.ErrorContext(ctx, "failed to notify an error on Discord", slog.Any("error", err))
+		return nil, err
+	}
+
+	return &usecase.NotifyErrorOutput{}, nil
+}
