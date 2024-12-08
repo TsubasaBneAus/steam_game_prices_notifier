@@ -189,8 +189,6 @@ func (u *notionWishlistItemUpdater) UpdateNotionWishlistItem(
 		return nil, err
 	}
 
-	fmt.Println(string(reqJSON))
-
 	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, reqURL, bytes.NewBuffer(reqJSON))
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
