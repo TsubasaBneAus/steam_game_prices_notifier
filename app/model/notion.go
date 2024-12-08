@@ -16,7 +16,7 @@ type NotionWishlistItems struct {
 
 // An item of NotionWishlistItems
 type NotionWishlistItem struct {
-	ID         NotionPageID      `json:"id"`
+	ID         NotionPageID      `json:"id,omitempty"`
 	Parent     *NotionParent     `json:"parent,omitempty"`
 	Properties *NotionProperties `json:"properties"`
 }

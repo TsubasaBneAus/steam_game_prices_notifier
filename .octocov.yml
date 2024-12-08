@@ -7,10 +7,16 @@ codeToTestRatio:
     - "**/*.go"
     - "!**/*_test.go"
     - "!**/mock/*.go"
+    - "!**/cmd/*.go"
+    - "!**/wire.go"
+    - "!**/wire_gen.go"
   test:
     - "**/*_test.go"
   exclude:
     - "**/mock/*.go"
+    - "**/cmd/*.go"
+    - "**/wire.go"
+    - "**/wire_gen.go"
   badge:
     path: docs/ratio.svg
 testExecutionTime:
