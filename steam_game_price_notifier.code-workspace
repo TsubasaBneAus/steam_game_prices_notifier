@@ -24,11 +24,14 @@
       "gosec",
       "gosimple",
       "govet",
+      "GPOD",
       "httpclient",
       "ineffassign",
+      "interactor",
       "ireturn",
       "makezero",
       "mockgen",
+      "multierror",
       "musttag",
       "nestif",
       "nilerr",
@@ -44,6 +47,8 @@
       "Steamworks",
       "tenv",
       "Tsubasa",
+      "usecase",
+      "wireinject",
       "wishlistdata"
     ]
   }
