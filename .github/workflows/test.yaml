@@ -1,6 +1,9 @@
 name: Test
 
-permissions: write-all
+permissions:
+  contents: read
+  attestations: read
+  pull-requests: write
 
 on:
   push:
@@ -27,4 +30,3 @@ jobs:
         uses: k1LoW/octocov-action@v1
         with:
           config: .octocov.yaml
-
