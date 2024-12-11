@@ -17,6 +17,7 @@
       "errcheck",
       "errorf",
       "errwrap",
+      "fileb",
       "GOARCH",
       "goconst",
       "godocs",

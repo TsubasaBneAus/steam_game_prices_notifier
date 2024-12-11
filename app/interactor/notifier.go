@@ -2,7 +2,6 @@ package interactor
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"strconv"
 	"sync"
@@ -201,10 +200,6 @@ func (n *videoGamePricesNotifier) createOrUpdateNotionWishlist(
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to update a wishlist item on the Notion DB", slog.Any("error", err))
 		return nil, err
-	}
-
-	for _, v := range discordContents {
-		fmt.Printf("%+v\n", v)
 	}
 
 	return discordContents, nil
