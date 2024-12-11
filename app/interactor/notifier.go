@@ -2,7 +2,6 @@ package interactor
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"strconv"
 	"sync"
