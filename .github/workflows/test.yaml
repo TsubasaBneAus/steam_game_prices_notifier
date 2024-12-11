@@ -1,8 +1,6 @@
 name: Test
 
 permissions:
-  contents: read
-  attestations: read
   pull-requests: write
 
 on:
