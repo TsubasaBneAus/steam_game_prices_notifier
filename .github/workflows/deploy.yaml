@@ -10,8 +10,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # permissions:
-    #   id-token: write
+    permissions:
+      id-token: write
     steps:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v4
