@@ -203,10 +203,6 @@ func (n *videoGamePricesNotifier) createOrUpdateNotionWishlist(
 		return nil, err
 	}
 
-	for _, v := range discordContents {
-		fmt.Printf("%+v\n", v)
-	}
-
 	return discordContents, nil
 }
 
