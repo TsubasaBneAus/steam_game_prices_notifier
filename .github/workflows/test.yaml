@@ -25,3 +25,6 @@ jobs:
 
       - name: Create a coverage report
         uses: k1LoW/octocov-action@v1
+        with:
+          config: .octocov.yaml
+
