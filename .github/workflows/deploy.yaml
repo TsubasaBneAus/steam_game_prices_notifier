@@ -34,7 +34,7 @@ jobs:
       - name: Deploy the application
         run: |
           aws lambda update-function-code \
-            --function-name steam-game-prices-notifier \
+            --function-name steam-game-prices-notifier-lambda \
             --architectures arm64 \
             --zip-file fileb://./function.zip \
             --publish
