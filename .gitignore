@@ -1,5 +1,6 @@
 .env
 coverage.out
+*.zip
 
 *.js
 !jest.config.js
