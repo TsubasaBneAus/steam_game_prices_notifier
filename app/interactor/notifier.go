@@ -22,6 +22,7 @@ type videoGamePricesNotifier struct {
 	nWGetter      service.NotionWishlistGetter
 	nWICreator    service.NotionWishlistItemCreator
 	nWIUpdater    service.NotionWishlistItemUpdater
+	nWIDeleter    service.NotionWishlistItemDeleter
 	vGPODNotifier service.VideoGamePricesOnDiscordNotifier
 }
 
@@ -35,6 +36,7 @@ func NewGamePricesNotifier(
 	nWGetter service.NotionWishlistGetter,
 	nWICreator service.NotionWishlistItemCreator,
 	nWIUpdater service.NotionWishlistItemUpdater,
+	nWIDeleter service.NotionWishlistItemDeleter,
 	vGPODNotifier service.VideoGamePricesOnDiscordNotifier,
 ) *videoGamePricesNotifier {
 	return &videoGamePricesNotifier{
@@ -44,6 +46,7 @@ func NewGamePricesNotifier(
 		nWGetter:      nWGetter,
 		nWICreator:    nWICreator,
 		nWIUpdater:    nWIUpdater,
+		nWIDeleter:    nWIDeleter,
 		vGPODNotifier: vGPODNotifier,
 	}
 }
@@ -75,6 +78,12 @@ func (n *videoGamePricesNotifier) NotifyVideoGamePrices(
 	discordContents, err := n.createOrUpdateNotionWishlist(ctx, vGDList, nWishlist.WishlistItems)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to create or update a wishlist on the Notion DB", slog.Any("error", err))
+		return nil, err
+	}
+
+	// Delete a wishlist on the Notion DB
+	if err := n.deleteNotionWishlistItems(ctx, vGDList, nWishlist.WishlistItems); err != nil {
+		slog.ErrorContext(ctx, "failed to delete a wishlist on the Notion DB", slog.Any("error", err))
 		return nil, err
 	}
 
@@ -408,6 +417,63 @@ func (n *videoGamePricesNotifier) convertReleaseDate(
 	return &model.NotionDate{
 		Start: convertedDate.Format(time.DateOnly),
 	}
+}
+
+// Delete a wishlist on the Notion DB
+//
+// [FYI]
+// The rate limiter is set to 3 requests per second and parallel processing is used
+func (n *videoGamePricesNotifier) deleteNotionWishlistItems(
+	ctx context.Context,
+	vGDList map[model.SteamAppID]*model.SteamStoreVideoGameDetails,
+	nWishList *model.NotionWishlistItems,
+) error {
+	// Convert a Notion wishlist to a map
+	convertedNWishList := make(map[model.SteamAppID]*model.NotionWishlistItem, len(nWishList.Results))
+	for _, v := range nWishList.Results {
+		appID, err := strconv.Atoi(v.Properties.NotionAppID.Title[0].NotionText.NotionContent)
+		if err != nil {
+			slog.ErrorContext(ctx, "failed to convert the app ID to int", slog.Any("error", err))
+			return err
+		}
+		convertedNWishList[model.SteamAppID(appID)] = v
+	}
+
+	// Categorize the Notion wishlist items to delete
+	listToDelete := make(map[model.SteamAppID]*model.NotionWishlistItem, len(convertedNWishList))
+	for i, v := range convertedNWishList {
+		if _, ok := vGDList[i]; !ok {
+			listToDelete[i] = v
+		}
+	}
+
+	limiter := rate.NewLimiter(3, 1)
+	meg := &multierror.Group{}
+	for _, v := range listToDelete {
+		if err := limiter.Wait(ctx); err != nil {
+			slog.ErrorContext(ctx, "failed to wait the rate limiter", slog.Any("error", err))
+			return err
+		}
+
+		meg.Go(func() error {
+			input := &service.DeleteNotionWishlistItemInput{
+				WishlistItem: v,
+			}
+			if _, err := n.nWIDeleter.DeleteNotionWishlistItem(ctx, input); err != nil {
+				slog.ErrorContext(ctx, "failed to delete a wishlist item on the Notion DB", slog.Any("error", err))
+				return err
+			}
+
+			return nil
+		})
+	}
+
+	if err := meg.Wait(); err != nil {
+		slog.ErrorContext(ctx, "failed to delete a wishlist item on the Notion DB", slog.Any("error", err))
+		return err
+	}
+
+	return nil
 }
 
 type errorOnDiscordNotifier struct {

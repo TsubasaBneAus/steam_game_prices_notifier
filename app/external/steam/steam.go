@@ -1,10 +1,8 @@
 package steam
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
-	"io"
 	"log/slog"
 	"net/http"
 	"net/url"
@@ -75,14 +73,8 @@ func (wg *steamWishlistGetter) GetSteamWishlist(
 		return nil, errUnexpectedStatusCode
 	}
 
-	buffer := bytes.Buffer{}
-	if _, err := io.Copy(&buffer, res.Body); err != nil {
-		slog.ErrorContext(ctx, "failed to read a Steam Store wishlist response", slog.Any("error", err))
-		return nil, err
-	}
-
 	wishlist := &model.SteamStoreWishlist{}
-	if err := json.Unmarshal(buffer.Bytes(), wishlist); err != nil {
+	if err := json.NewDecoder(res.Body).Decode(wishlist); err != nil {
 		slog.ErrorContext(
 			ctx,
 			"failed to unmarshal a Steam Store wishlist response",
@@ -163,22 +155,12 @@ func (vg *steamVideoGameDetailsGetter) GetSteamVideoGameDetails(
 		return nil, errUnexpectedStatusCode
 	}
 
-	buffer := bytes.Buffer{}
-	if _, err := io.Copy(&buffer, res.Body); err != nil {
-		slog.ErrorContext(
-			ctx,
-			"failed to read a Steam Store video game details response",
-			slog.Any("error", err),
-		)
-		return nil, err
-	}
-
 	// Unmarshal the response
 	//
 	// [FYI]
 	// Map is used because the response does not have fixed name keys
 	videoGameDetails := make(map[string]any, 1)
-	decoder := json.NewDecoder(&buffer)
+	decoder := json.NewDecoder(res.Body)
 	decoder.UseNumber()
 	if err := decoder.Decode(&videoGameDetails); err != nil {
 		slog.ErrorContext(

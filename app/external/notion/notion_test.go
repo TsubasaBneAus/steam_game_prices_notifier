@@ -757,3 +757,117 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		}
 	})
 }
+
+func TestDeleteNotionWishlistItem(t *testing.T) {
+	t.Parallel()
+
+	t.Run("Positive case: Successfully update a wishlist item in the Notion DB", func(t *testing.T) {
+		t.Parallel()
+
+		// Create a mock of the HTTP client
+		ctrl := gomock.NewController(t)
+		m := httpclient.NewMockHTTPClient(ctrl)
+		m.
+			EXPECT().
+			Do(gomock.Any()).
+			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+				jsonFile, err := os.Open("./testdata/updated_wishlist_item.json")
+				if err != nil {
+					t.Fatalf("failed to open updated_wishlist_item.json: %v", err)
+				}
+				defer jsonFile.Close()
+
+				buffer := bytes.Buffer{}
+				if _, err := io.Copy(&buffer, jsonFile); err != nil {
+					t.Fatalf("failed to read updated_wishlist_item.json: %v", err)
+				}
+
+				return &http.Response{
+					StatusCode: http.StatusOK,
+					Body:       io.NopCloser(bytes.NewReader(buffer.Bytes())),
+				}, nil
+			})
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.NotionConfig{
+			NotionAPIKey:     "dummy_notion_api_key",
+			NotionDatabaseID: "dummy_notion_database_id",
+		}
+		wg := NewNotionWishlistItemDeleter(cfg, m)
+		input := &service.DeleteNotionWishlistItemInput{
+			WishlistItem: &model.NotionWishlistItem{
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+			},
+		}
+		if _, err := wg.DeleteNotionWishlistItem(ctx, input); err != nil {
+			t.Errorf("\ngot: %v\nwant: %v", err, nil)
+		}
+	})
+
+	t.Run("Negative case: Fail to send a request", func(t *testing.T) {
+		t.Parallel()
+
+		// Create a mock of the HTTP client
+		ctrl := gomock.NewController(t)
+		m := httpclient.NewMockHTTPClient(ctrl)
+		wantErr := errors.New("unexpected error")
+		m.
+			EXPECT().
+			Do(gomock.Any()).
+			Return(nil, wantErr)
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.NotionConfig{
+			NotionAPIKey:     "dummy_notion_api_key",
+			NotionDatabaseID: "dummy_notion_database_id",
+		}
+		wg := NewNotionWishlistItemDeleter(cfg, m)
+		input := &service.DeleteNotionWishlistItemInput{
+			WishlistItem: &model.NotionWishlistItem{
+				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+			},
+		}
+		if _, gotErr := wg.DeleteNotionWishlistItem(ctx, input); !errors.Is(gotErr, wantErr) {
+			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("Negative case: Get a status code except 200", func(t *testing.T) {
+		t.Parallel()
+
+		// Create a mock of the HTTP client
+		ctrl := gomock.NewController(t)
+		m := httpclient.NewMockHTTPClient(ctrl)
+		m.
+			EXPECT().
+			Do(gomock.Any()).
+			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+				return &http.Response{
+					StatusCode: http.StatusInternalServerError,
+					Body:       http.NoBody,
+				}, nil
+			})
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.NotionConfig{
+			NotionAPIKey:     "dummy_notion_api_key",
+			NotionDatabaseID: "dummy_notion_database_id",
+		}
+		wg := NewNotionWishlistItemDeleter(cfg, m)
+		input := &service.DeleteNotionWishlistItemInput{
+			WishlistItem: &model.NotionWishlistItem{
+				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+			},
+		}
+		wantErr := errUnexpectedStatusCode
+		if _, gotErr := wg.DeleteNotionWishlistItem(ctx, input); !errors.Is(gotErr, wantErr) {
+			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
+		}
+	})
+}

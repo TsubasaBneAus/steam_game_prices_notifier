@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log/slog"
 	"net/http"
 	"net/url"
@@ -67,14 +66,8 @@ func (g *notionWishlistGetter) GetNotionWishlist(
 		return nil, errUnexpectedStatusCode
 	}
 
-	buffer := bytes.Buffer{}
-	if _, err := io.Copy(&buffer, res.Body); err != nil {
-		slog.ErrorContext(ctx, "failed to read a Notion API response", slog.Any("error", err))
-		return nil, err
-	}
-
 	wishlistItems := &model.NotionWishlistItems{}
-	if err := json.Unmarshal(buffer.Bytes(), wishlistItems); err != nil {
+	if err := json.NewDecoder(res.Body).Decode(wishlistItems); err != nil {
 		slog.ErrorContext(ctx, "failed to unmarshal a Notion API response", slog.Any("error", err))
 		return nil, err
 	}
@@ -210,4 +203,63 @@ func (u *notionWishlistItemUpdater) UpdateNotionWishlistItem(
 	}
 
 	return &service.UpdateNotionWishlistItemOutput{}, nil
+}
+
+type notionWishlistItemDeleter struct {
+	cfg        *config.NotionConfig
+	httpClient service.HTTPClient
+}
+
+var _ service.NotionWishlistItemDeleter = (*notionWishlistItemDeleter)(nil)
+
+// Generate a new NotionWishlistItemDeleter
+func NewNotionWishlistItemDeleter(
+	cfg *config.NotionConfig,
+	httpClient service.HTTPClient,
+) *notionWishlistItemDeleter {
+	return &notionWishlistItemDeleter{
+		cfg:        cfg,
+		httpClient: httpClient,
+	}
+}
+
+// Delete a wishlist item from the Notion DB
+func (d *notionWishlistItemDeleter) DeleteNotionWishlistItem(
+	ctx context.Context,
+	input *service.DeleteNotionWishlistItemInput,
+) (*service.DeleteNotionWishlistItemOutput, error) {
+	reqURL, err := url.JoinPath(notionAPIURL, "pages", string(input.WishlistItem.ID))
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to build a Notion API URL", slog.Any("error", err))
+		return nil, err
+	}
+
+	reqBody := bytes.NewBufferString(`{ "in_trash": true }`)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, reqURL, reqBody)
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
+		return nil, err
+	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", d.cfg.NotionAPIKey))
+	req.Header.Set("Notion-Version", "2022-06-28")
+	req.Header.Set("Content-Type", "application/json")
+
+	res, err := d.httpClient.Do(req)
+	if err != nil {
+		slog.ErrorContext(ctx, "failed to send a Notion API request", slog.Any("error", err))
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		slog.ErrorContext(
+			ctx,
+			"unexpected status code in a Notion API response",
+			slog.Any("status_code", res.StatusCode),
+		)
+		return nil, errUnexpectedStatusCode
+	}
+
+	return &service.DeleteNotionWishlistItemOutput{}, nil
 }

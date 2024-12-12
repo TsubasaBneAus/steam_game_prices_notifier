@@ -20,7 +20,7 @@ import (
 func TestNotifyVideoGamePrices(t *testing.T) {
 	t.Parallel()
 
-	// There is only one record in the Notion DB ([1, Title1, 2000, 1500, 2021-01-01])
+	// There is two records in the Notion DB ([1, Title1, 2000, 1500, 2021-01-01], [3, Title3, 2000, 1500, 2021-01-01])
 	// The Steam wishlist has two records ([1, 2])
 	// The Steam video game details has two records ([1, Title1, 1000, 1500, 2021-01-01], [2, Title2, nil, nil, To be announced])
 	// A new record will be created in the Notion DB ([2, Title2, nil, nil, nil]))
@@ -36,6 +36,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
 		nWICreator := notion.NewMockNotionWishlistItemCreator(ctrl)
 		nWIUpdater := notion.NewMockNotionWishlistItemUpdater(ctrl)
+		nWIDeleter := notion.NewMockNotionWishlistItemDeleter(ctrl)
 		vGPODNotifier := discord.NewMockVideoGamePricesOnDiscordNotifier(ctrl)
 		{
 			input := &service.GetSteamWishlistInput{}
@@ -112,6 +113,43 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 										{
 											NotionText: &model.NotionText{
 												NotionContent: "Title1",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
 											},
 										},
 									},
@@ -215,6 +253,49 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			nWIUpdater.EXPECT().UpdateNotionWishlistItem(gomock.Any(), input).Return(output, nil)
 		}
 		{
+			input := &service.DeleteNotionWishlistItemInput{
+				WishlistItem: &model.NotionWishlistItem{
+					ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					Parent: &model.NotionParent{
+						DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					Properties: &model.NotionProperties{
+						NotionAppID: &model.NotionAppID{
+							Title: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "3",
+									},
+								},
+							},
+						},
+						NotionName: &model.NotionName{
+							RichText: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "Title3",
+									},
+								},
+							},
+						},
+						CurrentPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(2000)),
+						},
+						LowestPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(1500)),
+						},
+						NotionReleaseDate: &model.NotionReleaseDate{
+							NotionDate: &model.NotionDate{
+								Start: "2021-01-01",
+							},
+						},
+					},
+				},
+			}
+			output := &service.DeleteNotionWishlistItemOutput{}
+			nWIDeleter.EXPECT().DeleteNotionWishlistItem(gomock.Any(), input).Return(output, nil)
+		}
+		{
 			input := &service.NotifyVideoGamePricesOnDiscordInput{
 				DiscordContents: map[model.SteamAppID]*model.DiscordContent{
 					1: {
@@ -235,7 +316,16 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nWICreator, nWIUpdater, vGPODNotifier)
+		n := NewGamePricesNotifier(
+			cfg,
+			sWGetter,
+			sVGGetter,
+			nWGetter,
+			nWICreator,
+			nWIUpdater,
+			nWIDeleter,
+			vGPODNotifier,
+		)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, err := n.NotifyVideoGamePrices(ctx, input); err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
@@ -251,6 +341,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		sVGGetter := steam.NewMockSteamVideoGameDetailsGetter(ctrl)
 		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
 		nWIUpdater := notion.NewMockNotionWishlistItemUpdater(ctrl)
+		nWIDeleter := notion.NewMockNotionWishlistItemDeleter(ctrl)
 		{
 			input := &service.GetSteamWishlistInput{}
 			output := &service.GetSteamWishlistOutput{
@@ -326,6 +417,43 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
 					},
 				},
 			}
@@ -371,6 +499,49 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			output := &service.UpdateNotionWishlistItemOutput{}
 			nWIUpdater.EXPECT().UpdateNotionWishlistItem(gomock.Any(), input).Return(output, nil)
 		}
+		{
+			input := &service.DeleteNotionWishlistItemInput{
+				WishlistItem: &model.NotionWishlistItem{
+					ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					Parent: &model.NotionParent{
+						DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					Properties: &model.NotionProperties{
+						NotionAppID: &model.NotionAppID{
+							Title: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "3",
+									},
+								},
+							},
+						},
+						NotionName: &model.NotionName{
+							RichText: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "Title3",
+									},
+								},
+							},
+						},
+						CurrentPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(2000)),
+						},
+						LowestPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(1500)),
+						},
+						NotionReleaseDate: &model.NotionReleaseDate{
+							NotionDate: &model.NotionDate{
+								Start: "2021-01-01",
+							},
+						},
+					},
+				},
+			}
+			output := &service.DeleteNotionWishlistItemOutput{}
+			nWIDeleter.EXPECT().DeleteNotionWishlistItem(gomock.Any(), input).Return(output, nil)
+		}
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -379,7 +550,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nWIDeleter, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, err := n.NotifyVideoGamePrices(ctx, input); err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
@@ -395,6 +566,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		sVGGetter := steam.NewMockSteamVideoGameDetailsGetter(ctrl)
 		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
 		nWIUpdater := notion.NewMockNotionWishlistItemUpdater(ctrl)
+		nWIDeleter := notion.NewMockNotionWishlistItemDeleter(ctrl)
 		{
 			input := &service.GetSteamWishlistInput{}
 			output := &service.GetSteamWishlistOutput{
@@ -470,6 +642,43 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
 					},
 				},
 			}
@@ -515,6 +724,49 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			output := &service.UpdateNotionWishlistItemOutput{}
 			nWIUpdater.EXPECT().UpdateNotionWishlistItem(gomock.Any(), input).Return(output, nil)
 		}
+		{
+			input := &service.DeleteNotionWishlistItemInput{
+				WishlistItem: &model.NotionWishlistItem{
+					ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					Parent: &model.NotionParent{
+						DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					Properties: &model.NotionProperties{
+						NotionAppID: &model.NotionAppID{
+							Title: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "3",
+									},
+								},
+							},
+						},
+						NotionName: &model.NotionName{
+							RichText: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "Title3",
+									},
+								},
+							},
+						},
+						CurrentPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(2000)),
+						},
+						LowestPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(1500)),
+						},
+						NotionReleaseDate: &model.NotionReleaseDate{
+							NotionDate: &model.NotionDate{
+								Start: "2021-01-01",
+							},
+						},
+					},
+				},
+			}
+			output := &service.DeleteNotionWishlistItemOutput{}
+			nWIDeleter.EXPECT().DeleteNotionWishlistItem(gomock.Any(), input).Return(output, nil)
+		}
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -523,7 +775,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nWIDeleter, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, err := n.NotifyVideoGamePrices(ctx, input); err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
@@ -549,7 +801,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, nil, nil, nil, nil, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, nil, nil, nil, nil, nil, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
@@ -593,7 +845,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nil, nil, nil, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nil, nil, nil, nil, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
@@ -654,7 +906,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nil, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nil, nil, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
@@ -708,7 +960,45 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
 				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{},
+					Results: []*model.NotionWishlistItem{
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
+					},
 				},
 			}
 			nWGetter.EXPECT().GetNotionWishlist(gomock.Any(), input).Return(output, nil)
@@ -762,7 +1052,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nWICreator, nil, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nWICreator, nil, nil, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
@@ -854,6 +1144,43 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
 					},
 				},
 			}
@@ -906,7 +1233,131 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil, nil)
+		input := &usecase.NotifyVideoGamePricesInput{}
+		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
+			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("Negative case: Failed to delete a Notion wishlist item", func(t *testing.T) {
+		t.Parallel()
+
+		// Create mocks
+		ctrl := gomock.NewController(t)
+		sWGetter := steam.NewMockSteamWishlistGetter(ctrl)
+		nWGetter := notion.NewMockNotionWishlistGetter(ctrl)
+		nWIDeleter := notion.NewMockNotionWishlistItemDeleter(ctrl)
+		wantErr := errors.New("unexpected error")
+		{
+			input := &service.GetSteamWishlistInput{}
+			output := &service.GetSteamWishlistOutput{
+				Wishlist: &model.SteamStoreWishlist{
+					Response: &model.SteamStoreResponse{
+						Items: []*model.SteamStoreItem{},
+					},
+				},
+			}
+			sWGetter.EXPECT().GetSteamWishlist(gomock.Any(), input).Return(output, nil)
+		}
+		{
+			input := &service.GetNotionWishlistInput{}
+			output := &service.GetNotionWishlistOutput{
+				WishlistItems: &model.NotionWishlistItems{
+					Results: []*model.NotionWishlistItem{
+						{
+							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+							Parent: &model.NotionParent{
+								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+							},
+							Properties: &model.NotionProperties{
+								NotionAppID: &model.NotionAppID{
+									Title: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "3",
+											},
+										},
+									},
+								},
+								NotionName: &model.NotionName{
+									RichText: []*model.NotionContent{
+										{
+											NotionText: &model.NotionText{
+												NotionContent: "Title3",
+											},
+										},
+									},
+								},
+								CurrentPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(2000)),
+								},
+								LowestPrice: &model.NotionPrice{
+									Number: pointer.Ptr(uint64(1500)),
+								},
+								NotionReleaseDate: &model.NotionReleaseDate{
+									NotionDate: &model.NotionDate{
+										Start: "2021-01-01",
+									},
+								},
+							},
+						},
+					},
+				},
+			}
+			nWGetter.EXPECT().GetNotionWishlist(gomock.Any(), input).Return(output, nil)
+		}
+		{
+			input := &service.DeleteNotionWishlistItemInput{
+				WishlistItem: &model.NotionWishlistItem{
+					ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					Parent: &model.NotionParent{
+						DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					Properties: &model.NotionProperties{
+						NotionAppID: &model.NotionAppID{
+							Title: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "3",
+									},
+								},
+							},
+						},
+						NotionName: &model.NotionName{
+							RichText: []*model.NotionContent{
+								{
+									NotionText: &model.NotionText{
+										NotionContent: "Title3",
+									},
+								},
+							},
+						},
+						CurrentPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(2000)),
+						},
+						LowestPrice: &model.NotionPrice{
+							Number: pointer.Ptr(uint64(1500)),
+						},
+						NotionReleaseDate: &model.NotionReleaseDate{
+							NotionDate: &model.NotionDate{
+								Start: "2021-01-01",
+							},
+						},
+					},
+				},
+			}
+			nWIDeleter.EXPECT().DeleteNotionWishlistItem(gomock.Any(), input).Return(nil, wantErr)
+		}
+
+		// Execute the method to be tested
+		ctx, cancel := context.WithCancel(context.Background())
+		defer cancel()
+		cfg := &config.NotionConfig{
+			NotionAPIKey:     "dummy-notion-api-key",
+			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+		}
+		n := NewGamePricesNotifier(cfg, sWGetter, nil, nWGetter, nil, nil, nWIDeleter, nil)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
@@ -1064,7 +1515,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 		}
-		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, vGPODNotifier)
+		n := NewGamePricesNotifier(cfg, sWGetter, sVGGetter, nWGetter, nil, nWIUpdater, nil, vGPODNotifier)
 		input := &usecase.NotifyVideoGamePricesInput{}
 		if _, gotErr := n.NotifyVideoGamePrices(ctx, input); !errors.Is(gotErr, wantErr) {
 			t.Errorf("\ngot: %v\nwant: %v", gotErr, wantErr)
