@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log/slog"
 	"net/http"
 	"net/url"
@@ -67,14 +66,8 @@ func (g *notionWishlistGetter) GetNotionWishlist(
 		return nil, errUnexpectedStatusCode
 	}
 
-	buffer := bytes.Buffer{}
-	if _, err := io.Copy(&buffer, res.Body); err != nil {
-		slog.ErrorContext(ctx, "failed to read a Notion API response", slog.Any("error", err))
-		return nil, err
-	}
-
 	wishlistItems := &model.NotionWishlistItems{}
-	if err := json.Unmarshal(buffer.Bytes(), wishlistItems); err != nil {
+	if err := json.NewDecoder(res.Body).Decode(wishlistItems); err != nil {
 		slog.ErrorContext(ctx, "failed to unmarshal a Notion API response", slog.Any("error", err))
 		return nil, err
 	}
