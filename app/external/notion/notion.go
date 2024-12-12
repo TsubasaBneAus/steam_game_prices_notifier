@@ -235,7 +235,7 @@ func (d *notionWishlistItemDeleter) DeleteNotionWishlistItem(
 	}
 
 	reqBody := bytes.NewBufferString(`{ "in_trash": true }`)
-	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, reqURL, reqBody)
+	req, err := http.NewRequestWithContext(ctx, http.MethodPatch, reqURL, reqBody)
 	if err != nil {
 		slog.ErrorContext(ctx, "failed to create a Notion API request", slog.Any("error", err))
 		return nil, err
