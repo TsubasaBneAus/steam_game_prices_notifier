@@ -243,6 +243,7 @@ func (d *notionWishlistItemDeleter) DeleteNotionWishlistItem(
 
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", d.cfg.NotionAPIKey))
 	req.Header.Set("Notion-Version", "2022-06-28")
+	req.Header.Set("Content-Type", "application/json")
 
 	res, err := d.httpClient.Do(req)
 	if err != nil {
