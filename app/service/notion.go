@@ -61,3 +61,21 @@ type (
 		) (*UpdateNotionWishlistItemOutput, error)
 	}
 )
+
+type (
+	// An input to delete a wishlist item from the Notion DB
+	DeleteNotionWishlistItemInput struct {
+		WishlistItem *model.NotionWishlistItem
+	}
+
+	// An output to delete a wishlist item from the Notion DB
+	DeleteNotionWishlistItemOutput struct{}
+
+	// An interface to delete a wishlist item from the Notion DB
+	NotionWishlistItemDeleter interface {
+		DeleteNotionWishlistItem(
+			ctx context.Context,
+			input *DeleteNotionWishlistItemInput,
+		) (*DeleteNotionWishlistItemOutput, error)
+	}
+)

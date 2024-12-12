@@ -205,3 +205,66 @@ func (c *MockNotionWishlistItemUpdaterUpdateNotionWishlistItemCall) DoAndReturn(
 	c.Call = c.Call.DoAndReturn(f)
 	return c
 }
+
+// MockNotionWishlistItemDeleter is a mock of NotionWishlistItemDeleter interface.
+type MockNotionWishlistItemDeleter struct {
+	ctrl     *gomock.Controller
+	recorder *MockNotionWishlistItemDeleterMockRecorder
+	isgomock struct{}
+}
+
+// MockNotionWishlistItemDeleterMockRecorder is the mock recorder for MockNotionWishlistItemDeleter.
+type MockNotionWishlistItemDeleterMockRecorder struct {
+	mock *MockNotionWishlistItemDeleter
+}
+
+// NewMockNotionWishlistItemDeleter creates a new mock instance.
+func NewMockNotionWishlistItemDeleter(ctrl *gomock.Controller) *MockNotionWishlistItemDeleter {
+	mock := &MockNotionWishlistItemDeleter{ctrl: ctrl}
+	mock.recorder = &MockNotionWishlistItemDeleterMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockNotionWishlistItemDeleter) EXPECT() *MockNotionWishlistItemDeleterMockRecorder {
+	return m.recorder
+}
+
+// DeleteNotionWishlistItem mocks base method.
+func (m *MockNotionWishlistItemDeleter) DeleteNotionWishlistItem(ctx context.Context, input *service.DeleteNotionWishlistItemInput) (*service.DeleteNotionWishlistItemOutput, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteNotionWishlistItem", ctx, input)
+	ret0, _ := ret[0].(*service.DeleteNotionWishlistItemOutput)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteNotionWishlistItem indicates an expected call of DeleteNotionWishlistItem.
+func (mr *MockNotionWishlistItemDeleterMockRecorder) DeleteNotionWishlistItem(ctx, input any) *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall {
+	mr.mock.ctrl.T.Helper()
+	call := mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteNotionWishlistItem", reflect.TypeOf((*MockNotionWishlistItemDeleter)(nil).DeleteNotionWishlistItem), ctx, input)
+	return &MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall{Call: call}
+}
+
+// MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall wrap *gomock.Call
+type MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall struct {
+	*gomock.Call
+}
+
+// Return rewrite *gomock.Call.Return
+func (c *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall) Return(arg0 *service.DeleteNotionWishlistItemOutput, arg1 error) *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall {
+	c.Call = c.Call.Return(arg0, arg1)
+	return c
+}
+
+// Do rewrite *gomock.Call.Do
+func (c *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall) Do(f func(context.Context, *service.DeleteNotionWishlistItemInput) (*service.DeleteNotionWishlistItemOutput, error)) *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall {
+	c.Call = c.Call.Do(f)
+	return c
+}
+
+// DoAndReturn rewrite *gomock.Call.DoAndReturn
+func (c *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall) DoAndReturn(f func(context.Context, *service.DeleteNotionWishlistItemInput) (*service.DeleteNotionWishlistItemOutput, error)) *MockNotionWishlistItemDeleterDeleteNotionWishlistItemCall {
+	c.Call = c.Call.DoAndReturn(f)
+	return c
+}
