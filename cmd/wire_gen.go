@@ -35,12 +35,13 @@ func InitializeApp(ctx context.Context) (*app, error) {
 	notionWishlistGetter := notion.NewNotionWishlistGetter(notionConfig, httpClient)
 	notionWishlistItemCreator := notion.NewNotionWishlistItemCreator(notionConfig, httpClient)
 	notionWishlistItemUpdater := notion.NewNotionWishlistItemUpdater(notionConfig, httpClient)
+	notionWishlistItemDeleter := notion.NewNotionWishlistItemDeleter(notionConfig, httpClient)
 	discordConfig, err := config.NewDiscordConfig(ctx)
 	if err != nil {
 		return nil, err
 	}
 	videoGamePricesOnDiscordNotifier := discord.NewVideoGamePricesOnDiscordNotifier(discordConfig, httpClient)
-	videoGamePricesNotifier := interactor.NewGamePricesNotifier(notionConfig, steamWishlistGetter, steamVideoGameDetailsGetter, notionWishlistGetter, notionWishlistItemCreator, notionWishlistItemUpdater, videoGamePricesOnDiscordNotifier)
+	videoGamePricesNotifier := interactor.NewGamePricesNotifier(notionConfig, steamWishlistGetter, steamVideoGameDetailsGetter, notionWishlistGetter, notionWishlistItemCreator, notionWishlistItemUpdater, notionWishlistItemDeleter, videoGamePricesOnDiscordNotifier)
 	errorOnDiscordNotifier := discord.NewErrorOnDiscordNotifier(discordConfig, httpClient)
 	interactorErrorOnDiscordNotifier := interactor.NewErrorOnDiscordNotifier(discordConfig, errorOnDiscordNotifier)
 	mainApp := NewApp(videoGamePricesNotifier, interactorErrorOnDiscordNotifier)
