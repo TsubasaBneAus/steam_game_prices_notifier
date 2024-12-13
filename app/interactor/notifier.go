@@ -320,7 +320,8 @@ func (n *videoGamePricesNotifier) updateNotionWishlistItems(
 			if convertedNWishList[i].Properties.LowestPrice.Number == nil || currentPrice == nil {
 				// The current and lowest prices are set to nil if either price is not available
 				lowestPrice = nil
-			} else if *convertedNWishList[i].Properties.LowestPrice.Number > *currentPrice {
+			} else if *convertedNWishList[i].Properties.LowestPrice.Number >= *currentPrice {
+				// Add a video game to the Discord content if the current price is lower than or equal to the lowest price
 				discordContents[i] = &model.DiscordContent{
 					Title:        v.Title,
 					CurrentPrice: *currentPrice,
