@@ -121,7 +121,7 @@ func (n *errorOnDiscordNotifier) NotifyErrorOnDiscord(
 
 	// Build a request body of a Discord message
 	body := &model.DiscordMessageBody{
-		Content: fmt.Sprintf("## An error occurred:\n%v", input.GeneratedError),
+		Content: fmt.Sprintf("## An error occurred:\n- %s", input.GeneratedError.Error()),
 	}
 	reqJSON, err := json.Marshal(body)
 	if err != nil {
