@@ -91,79 +91,77 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "1",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "1",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title1",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title1",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -378,79 +376,77 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "1",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "1",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title1",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title1",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: nil,
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: nil,
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -603,79 +599,77 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "1",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "1",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title1",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title1",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -959,42 +953,40 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -1105,79 +1097,77 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "1",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "1",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title1",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title1",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+					},
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -1263,42 +1253,40 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "3",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "3",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title3",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title3",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},
@@ -1411,42 +1399,40 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		{
 			input := &service.GetNotionWishlistInput{}
 			output := &service.GetNotionWishlistOutput{
-				WishlistItems: &model.NotionWishlistItems{
-					Results: []*model.NotionWishlistItem{
-						{
-							ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-							Parent: &model.NotionParent{
-								DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				WishlistItems: []*model.NotionWishlistItem{
+					{
+						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						Parent: &model.NotionParent{
+							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+						},
+						Properties: &model.NotionProperties{
+							NotionAppID: &model.NotionAppID{
+								Title: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "1",
+										},
+									},
+								},
 							},
-							Properties: &model.NotionProperties{
-								NotionAppID: &model.NotionAppID{
-									Title: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "1",
-											},
+							NotionName: &model.NotionName{
+								RichText: []*model.NotionContent{
+									{
+										NotionText: &model.NotionText{
+											NotionContent: "Title1",
 										},
 									},
 								},
-								NotionName: &model.NotionName{
-									RichText: []*model.NotionContent{
-										{
-											NotionText: &model.NotionText{
-												NotionContent: "Title1",
-											},
-										},
-									},
-								},
-								CurrentPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(2000)),
-								},
-								LowestPrice: &model.NotionPrice{
-									Number: pointer.Ptr(uint64(1500)),
-								},
-								NotionReleaseDate: &model.NotionReleaseDate{
-									NotionDate: &model.NotionDate{
-										Start: "2021-01-01",
-									},
+							},
+							CurrentPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(2000)),
+							},
+							LowestPrice: &model.NotionPrice{
+								Number: pointer.Ptr(uint64(1500)),
+							},
+							NotionReleaseDate: &model.NotionReleaseDate{
+								NotionDate: &model.NotionDate{
+									Start: "2021-01-01",
 								},
 							},
 						},

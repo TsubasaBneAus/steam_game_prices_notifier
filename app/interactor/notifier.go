@@ -173,11 +173,11 @@ func (n *videoGamePricesNotifier) getVideoGameDetailsList(
 func (n *videoGamePricesNotifier) createOrUpdateNotionWishlist(
 	ctx context.Context,
 	vGDList map[model.SteamAppID]*model.SteamStoreVideoGameDetails,
-	nWishList *model.NotionWishlistItems,
+	nWishList []*model.NotionWishlistItem,
 ) (map[model.SteamAppID]*model.DiscordContent, error) {
 	// Convert a Notion wishlist to a map
-	convertedNWishList := make(map[model.SteamAppID]*model.NotionWishlistItem, len(nWishList.Results))
-	for _, v := range nWishList.Results {
+	convertedNWishList := make(map[model.SteamAppID]*model.NotionWishlistItem, len(nWishList))
+	for _, v := range nWishList {
 		appID, err := strconv.Atoi(v.Properties.NotionAppID.Title[0].NotionText.NotionContent)
 		if err != nil {
 			slog.ErrorContext(ctx, "failed to convert the app ID to int", slog.Any("error", err))
@@ -426,11 +426,11 @@ func (n *videoGamePricesNotifier) convertReleaseDate(
 func (n *videoGamePricesNotifier) deleteNotionWishlistItems(
 	ctx context.Context,
 	vGDList map[model.SteamAppID]*model.SteamStoreVideoGameDetails,
-	nWishList *model.NotionWishlistItems,
+	nWishList []*model.NotionWishlistItem,
 ) error {
 	// Convert a Notion wishlist to a map
-	convertedNWishList := make(map[model.SteamAppID]*model.NotionWishlistItem, len(nWishList.Results))
-	for _, v := range nWishList.Results {
+	convertedNWishList := make(map[model.SteamAppID]*model.NotionWishlistItem, len(nWishList))
+	for _, v := range nWishList {
 		appID, err := strconv.Atoi(v.Properties.NotionAppID.Title[0].NotionText.NotionContent)
 		if err != nil {
 			slog.ErrorContext(ctx, "failed to convert the app ID to int", slog.Any("error", err))
