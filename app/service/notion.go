@@ -14,7 +14,7 @@ type (
 
 	// An output to get a wishlist from the Notion DB
 	GetNotionWishlistOutput struct {
-		WishlistItems *model.NotionWishlistItems
+		WishlistItems []*model.NotionWishlistItem
 	}
 
 	// An interface to get a wishlist from the Notion DB

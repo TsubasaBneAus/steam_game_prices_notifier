@@ -10,6 +10,7 @@ import (
 	"github.com/TsubasaBneAus/steam_game_price_notifier/app/model"
 	"github.com/TsubasaBneAus/steam_game_price_notifier/app/service"
 	"github.com/TsubasaBneAus/steam_game_price_notifier/config"
+	"github.com/google/go-cmp/cmp"
 	"go.uber.org/mock/gomock"
 )
 
@@ -25,12 +26,18 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusNoContent,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -63,12 +70,18 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusNoContent,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -96,7 +109,15 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -129,12 +150,18 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -172,12 +199,18 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusNoContent,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -205,7 +238,15 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -232,12 +273,18 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://discord.com/api/webhooks/dummy_discord_webhook_id/dummy_discord_webhook_token"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())

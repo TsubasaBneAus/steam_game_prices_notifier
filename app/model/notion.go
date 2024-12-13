@@ -6,12 +6,18 @@ import (
 	"time"
 )
 
+// A request body to query the Notion DB
+type NotionDBQuerierBody struct {
+	StartCursor *string `json:"start_cursor,omitempty"`
+}
+
 // A Notion page ID
 type NotionPageID string
 
 // Items of a wishlist in the Notion DB
 type NotionWishlistItems struct {
-	Results []*NotionWishlistItem `json:"results"`
+	Results    []*NotionWishlistItem `json:"results"`
+	NextCursor *string               `json:"next_cursor"`
 }
 
 // An item of NotionWishlistItems

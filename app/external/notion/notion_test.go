@@ -27,26 +27,60 @@ func TestGetNotionWishlist(t *testing.T) {
 		// Create a mock of the HTTP client
 		ctrl := gomock.NewController(t)
 		m := httpclient.NewMockHTTPClient(ctrl)
-		m.
-			EXPECT().
-			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
-				jsonFile, err := os.Open("./testdata/wishlist.json")
-				if err != nil {
-					t.Fatalf("failed to open wishlist.json: %v", err)
-				}
-				defer jsonFile.Close()
+		gomock.InOrder(
+			m.
+				EXPECT().
+				Do(gomock.Any()).
+				DoAndReturn(func(req *http.Request) (*http.Response, error) {
+					got := req.URL.String()
+					want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+					if diff := cmp.Diff(got, want); diff != "" {
+						t.Errorf("got(-) want(+)\n%s", diff)
+					}
 
-				buffer := bytes.Buffer{}
-				if _, err := io.Copy(&buffer, jsonFile); err != nil {
-					t.Fatalf("failed to read wishlist.json: %v", err)
-				}
+					jsonFile, err := os.Open("./testdata/the_1st_wishlist.json")
+					if err != nil {
+						t.Fatalf("failed to open the_1st_wishlist.json: %v", err)
+					}
+					defer jsonFile.Close()
 
-				return &http.Response{
-					StatusCode: http.StatusOK,
-					Body:       io.NopCloser(bytes.NewReader(buffer.Bytes())),
-				}, nil
-			})
+					buffer := bytes.Buffer{}
+					if _, err := io.Copy(&buffer, jsonFile); err != nil {
+						t.Fatalf("failed to read the_1st_wishlist.json: %v", err)
+					}
+
+					return &http.Response{
+						StatusCode: http.StatusOK,
+						Body:       io.NopCloser(bytes.NewReader(buffer.Bytes())),
+					}, nil
+				}),
+			m.
+				EXPECT().
+				Do(gomock.Any()).
+				DoAndReturn(func(req *http.Request) (*http.Response, error) {
+					got := req.URL.String()
+					want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+					if diff := cmp.Diff(got, want); diff != "" {
+						t.Errorf("got(-) want(+)\n%s", diff)
+					}
+
+					jsonFile, err := os.Open("./testdata/the_2nd_wishlist.json")
+					if err != nil {
+						t.Fatalf("failed to open the_2nd_wishlist.json: %v", err)
+					}
+					defer jsonFile.Close()
+
+					buffer := bytes.Buffer{}
+					if _, err := io.Copy(&buffer, jsonFile); err != nil {
+						t.Fatalf("failed to read the_2nd_wishlist.json: %v", err)
+					}
+
+					return &http.Response{
+						StatusCode: http.StatusOK,
+						Body:       io.NopCloser(bytes.NewReader(buffer.Bytes())),
+					}, nil
+				}),
+		)
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -60,71 +94,49 @@ func TestGetNotionWishlist(t *testing.T) {
 		if err != nil {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
 		}
-		want := &service.GetNotionWishlistOutput{
-			WishlistItems: &model.NotionWishlistItems{
-				Results: []*model.NotionWishlistItem{
-					{
-						ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-						Parent: &model.NotionParent{
-							DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-						},
-						Properties: &model.NotionProperties{
-							NotionAppID: &model.NotionAppID{
-								Title: []*model.NotionContent{},
-							},
-							NotionName: &model.NotionName{
-								RichText: []*model.NotionContent{},
-							},
-							CurrentPrice: &model.NotionPrice{
-								Number: nil,
-							},
-							LowestPrice: &model.NotionPrice{
-								Number: nil,
-							},
-							NotionReleaseDate: &model.NotionReleaseDate{
-								NotionDate: nil,
+		wishlistItems := make([]*model.NotionWishlistItem, 0, 101)
+		for range 101 {
+			wishlistItem := &model.NotionWishlistItem{
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				Parent: &model.NotionParent{
+					DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+				},
+				Properties: &model.NotionProperties{
+					NotionAppID: &model.NotionAppID{
+						Title: []*model.NotionContent{
+							{
+								NotionText: &model.NotionText{
+									NotionContent: "2701660",
+								},
 							},
 						},
 					},
-					{
-						ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-						Parent: &model.NotionParent{
-							DatabaseID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					NotionName: &model.NotionName{
+						RichText: []*model.NotionContent{
+							{
+								NotionText: &model.NotionText{
+									NotionContent: "ドラゴンクエストIII　そして伝説へ…",
+								},
+							},
 						},
-						Properties: &model.NotionProperties{
-							NotionAppID: &model.NotionAppID{
-								Title: []*model.NotionContent{
-									{
-										NotionText: &model.NotionText{
-											NotionContent: "2701660",
-										},
-									},
-								},
-							},
-							NotionName: &model.NotionName{
-								RichText: []*model.NotionContent{
-									{
-										NotionText: &model.NotionText{
-											NotionContent: "ドラゴンクエストIII　そして伝説へ…",
-										},
-									},
-								},
-							},
-							CurrentPrice: &model.NotionPrice{
-								Number: pointer.Ptr(uint64(7678)),
-							},
-							LowestPrice: &model.NotionPrice{
-								Number: pointer.Ptr(uint64(7678)),
-							},
-							NotionReleaseDate: &model.NotionReleaseDate{
-								NotionDate: &model.NotionDate{
-									Start: "2024-11-15",
-								},
-							},
+					},
+					CurrentPrice: &model.NotionPrice{
+						Number: pointer.Ptr(uint64(7678)),
+					},
+					LowestPrice: &model.NotionPrice{
+						Number: pointer.Ptr(uint64(7678)),
+					},
+					NotionReleaseDate: &model.NotionReleaseDate{
+						NotionDate: &model.NotionDate{
+							Start: "2024-11-15",
 						},
 					},
 				},
-			},
+			}
+			wishlistItems = append(wishlistItems, wishlistItem)
+		}
+		want := &service.GetNotionWishlistOutput{
+			WishlistItems: wishlistItems,
 		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf("got(-) want(+)\n%s", diff)
@@ -140,7 +152,13 @@ func TestGetNotionWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/empty_wishlist.json")
 				if err != nil {
 					t.Fatalf("failed to open empty_wishlist.json: %v", err)
@@ -171,9 +189,7 @@ func TestGetNotionWishlist(t *testing.T) {
 			t.Errorf("\ngot: %v\nwant: %v", err, nil)
 		}
 		want := &service.GetNotionWishlistOutput{
-			WishlistItems: &model.NotionWishlistItems{
-				Results: []*model.NotionWishlistItem{},
-			},
+			WishlistItems: []*model.NotionWishlistItem{},
 		}
 		if diff := cmp.Diff(got, want); diff != "" {
 			t.Errorf("got(-) want(+)\n%s", diff)
@@ -190,7 +206,15 @@ func TestGetNotionWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -214,12 +238,18 @@ func TestGetNotionWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -244,12 +274,18 @@ func TestGetNotionWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/databases/dummy_notion_database_id/query"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusOK,
 					Body:       io.NopCloser(bytes.NewReader([]byte("invalid JSON"))),
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -277,7 +313,13 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/created_wishlist_item.json")
 				if err != nil {
 					t.Fatalf("failed to open created_wishlist_item.json: %v", err)
@@ -355,7 +397,13 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/created_empty_wishlist_item.json")
 				if err != nil {
 					t.Fatalf("failed to open created_empty_wishlist_item.json: %v", err)
@@ -420,7 +468,15 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -482,7 +538,13 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
@@ -554,7 +616,13 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/updated_wishlist_item.json")
 				if err != nil {
 					t.Fatalf("failed to open updated_wishlist_item.json: %v", err)
@@ -634,7 +702,15 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -646,9 +722,9 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		wg := NewNotionWishlistItemUpdater(cfg, m)
 		input := &service.UpdateNotionWishlistItemInput{
 			WishlistItem: &model.NotionWishlistItem{
-				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 				Parent: &model.NotionParent{
-					DatabaseID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 				},
 				Properties: &model.NotionProperties{
 					NotionAppID: &model.NotionAppID{
@@ -697,7 +773,13 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
@@ -714,9 +796,9 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 		wg := NewNotionWishlistItemUpdater(cfg, m)
 		input := &service.UpdateNotionWishlistItemInput{
 			WishlistItem: &model.NotionWishlistItem{
-				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 				Parent: &model.NotionParent{
-					DatabaseID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+					DatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 				},
 				Properties: &model.NotionProperties{
 					NotionAppID: &model.NotionAppID{
@@ -770,7 +852,13 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/updated_wishlist_item.json")
 				if err != nil {
 					t.Fatalf("failed to open updated_wishlist_item.json: %v", err)
@@ -816,7 +904,15 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -828,7 +924,7 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 		wg := NewNotionWishlistItemDeleter(cfg, m)
 		input := &service.DeleteNotionWishlistItemInput{
 			WishlistItem: &model.NotionWishlistItem{
-				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 			},
 		}
 		if _, gotErr := wg.DeleteNotionWishlistItem(ctx, input); !errors.Is(gotErr, wantErr) {
@@ -845,7 +941,13 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.notion.com/v1/pages/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
@@ -862,7 +964,7 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 		wg := NewNotionWishlistItemDeleter(cfg, m)
 		input := &service.DeleteNotionWishlistItemInput{
 			WishlistItem: &model.NotionWishlistItem{
-				ID: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+				ID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
 			},
 		}
 		wantErr := errUnexpectedStatusCode

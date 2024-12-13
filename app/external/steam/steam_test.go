@@ -29,7 +29,13 @@ func TestGetSteamWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.steampowered.com/IWishlistService/GetWishlist/v1/?steamid=dummy_steam_user_id"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/wishlist.json")
 				if err != nil {
 					t.Fatalf("failed to open wishlist.json: %v", err)
@@ -86,7 +92,13 @@ func TestGetSteamWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.steampowered.com/IWishlistService/GetWishlist/v1/?steamid=dummy_steam_user_id"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/empty_wishlist.json")
 				if err != nil {
 					t.Fatalf("failed to open empty_wishlist.json: %v", err)
@@ -137,7 +149,15 @@ func TestGetSteamWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.steampowered.com/IWishlistService/GetWishlist/v1/?steamid=dummy_steam_user_id"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -160,12 +180,18 @@ func TestGetSteamWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.steampowered.com/IWishlistService/GetWishlist/v1/?steamid=dummy_steam_user_id"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -189,12 +215,18 @@ func TestGetSteamWishlist(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://api.steampowered.com/IWishlistService/GetWishlist/v1/?steamid=dummy_steam_user_id"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusOK,
 					Body:       io.NopCloser(bytes.NewReader([]byte("invalid JSON"))),
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -221,7 +253,13 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			DoAndReturn(func(_ *http.Request) (*http.Response, error) {
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://store.steampowered.com/api/appdetails/?appids=2701660&cc=jp"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
 				jsonFile, err := os.Open("./testdata/video_game_details.json")
 				if err != nil {
 					t.Fatalf("failed to open video_game_details.json: %v", err)
@@ -280,7 +318,15 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(nil, wantErr)
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://store.steampowered.com/api/appdetails/?appids=2701660&cc=jp"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return nil, wantErr
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -306,12 +352,18 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://store.steampowered.com/api/appdetails/?appids=2701660&cc=jp"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusInternalServerError,
 					Body:       http.NoBody,
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
@@ -338,12 +390,18 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 		m.
 			EXPECT().
 			Do(gomock.Any()).
-			Return(
-				&http.Response{
+			DoAndReturn(func(req *http.Request) (*http.Response, error) {
+				got := req.URL.String()
+				want := "https://store.steampowered.com/api/appdetails/?appids=2701660&cc=jp"
+				if diff := cmp.Diff(got, want); diff != "" {
+					t.Errorf("got(-) want(+)\n%s", diff)
+				}
+
+				return &http.Response{
 					StatusCode: http.StatusOK,
 					Body:       io.NopCloser(bytes.NewReader([]byte("invalid JSON"))),
-				}, nil,
-			)
+				}, nil
+			})
 
 		// Execute the method to be tested
 		ctx, cancel := context.WithCancel(context.Background())
