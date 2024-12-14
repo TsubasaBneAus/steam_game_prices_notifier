@@ -111,7 +111,7 @@ func TestGetNotionWishlist(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -360,7 +360,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -438,7 +438,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 					NotionAppID: &model.NotionAppID{
 						Title: nil,
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{},
 					},
 					CurrentPrice: &model.NotionPrice{
@@ -501,7 +501,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -574,7 +574,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -664,7 +664,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -736,7 +736,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{
@@ -810,7 +810,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 							},
 						},
 					},
-					NotionName: &model.NotionName{
+					NotionTitle: &model.NotionTitle{
 						RichText: []*model.NotionContent{
 							{
 								NotionText: &model.NotionText{

@@ -252,7 +252,7 @@ func (n *videoGamePricesNotifier) createNotionWishlistItems(
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -345,7 +345,7 @@ func (n *videoGamePricesNotifier) updateNotionWishlistItems(
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
