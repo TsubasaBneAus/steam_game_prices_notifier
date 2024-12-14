@@ -107,7 +107,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -144,7 +144,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -186,7 +186,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -224,7 +224,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -267,7 +267,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -392,7 +392,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -429,7 +429,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -469,7 +469,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -512,7 +512,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -615,7 +615,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -652,7 +652,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -692,7 +692,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -735,7 +735,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -969,7 +969,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -1011,7 +1011,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -1113,7 +1113,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -1150,7 +1150,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -1190,7 +1190,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -1269,7 +1269,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -1312,7 +1312,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{
@@ -1415,7 +1415,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 									},
 								},
 							},
-							NotionName: &model.NotionName{
+							NotionTitle: &model.NotionTitle{
 								RichText: []*model.NotionContent{
 									{
 										NotionText: &model.NotionText{
@@ -1455,7 +1455,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 								},
 							},
 						},
-						NotionName: &model.NotionName{
+						NotionTitle: &model.NotionTitle{
 							RichText: []*model.NotionContent{
 								{
 									NotionText: &model.NotionText{

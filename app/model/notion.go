@@ -38,7 +38,7 @@ type NotionParent struct {
 // Properties of NotionWishlistItem
 type NotionProperties struct {
 	NotionAppID       *NotionAppID       `json:"App ID,omitempty"`
-	NotionName        *NotionName        `json:"Name,omitempty"`
+	NotionTitle       *NotionTitle       `json:"Title,omitempty"`
 	CurrentPrice      *NotionPrice       `json:"Current Price,omitempty"`
 	LowestPrice       *NotionPrice       `json:"Lowest Price,omitempty"`
 	NotionReleaseDate *NotionReleaseDate `json:"Release Date,omitempty"`
@@ -50,11 +50,11 @@ type NotionAppID struct {
 }
 
 // A name of NotionProperties
-type NotionName struct {
+type NotionTitle struct {
 	RichText []*NotionContent `json:"rich_text"`
 }
 
-// A content of NotionName
+// A content of NotionTitle
 type NotionContent struct {
 	NotionText *NotionText `json:"text"`
 }
