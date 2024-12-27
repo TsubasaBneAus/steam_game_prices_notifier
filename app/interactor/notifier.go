@@ -134,9 +134,6 @@ func (n *videoGamePricesNotifier) getVideoGameDetailsList(
 		}
 
 		meg.Go(func() error {
-			mu.Lock()
-			defer mu.Unlock()
-
 			// Get a video game details on the Steam Store
 			input := &service.GetSteamVideoGameDetailsInput{
 				AppID: model.SteamAppID(item.AppID),
@@ -151,7 +148,9 @@ func (n *videoGamePricesNotifier) getVideoGameDetailsList(
 				return err
 			}
 
+			mu.Lock()
 			videoGameDetailsList[model.SteamAppID(item.AppID)] = videoGameDetails.VideoGameDetails
+			mu.Unlock()
 
 			return nil
 		})
