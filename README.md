@@ -2,7 +2,7 @@
 
 ## System Diagram
 
-![steam_game_prices_notifier drawio](https://github.com/user-attachments/assets/85e8c8e0-7dcd-4c9f-a83f-cecc637f6267)
+![steam_game_prices_notifier drawio](/docs/steam_game_prices_notifier.drawio.png)
 
 ## Application Description
 
