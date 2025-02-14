@@ -8,3 +8,16 @@ updates:
     directory: "/awscdk"
     schedule:
       interval: "weekly"
+    groups:
+      typescript:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "aws-cdk"
+          - "aws-cdk-lib"
+          - "constructs"
+      awscdk:
+        patterns:
+          - "aws-cdk"
+          - "aws-cdk-lib"
+          - "constructs"
