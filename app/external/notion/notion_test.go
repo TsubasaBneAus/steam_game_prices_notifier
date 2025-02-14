@@ -2,7 +2,6 @@ package notion
 
 import (
 	"bytes"
-	"context"
 	"errors"
 	"io"
 	"net/http"
@@ -83,8 +82,7 @@ func TestGetNotionWishlist(t *testing.T) {
 		)
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -177,8 +175,7 @@ func TestGetNotionWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -217,8 +214,7 @@ func TestGetNotionWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -252,8 +248,7 @@ func TestGetNotionWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -288,8 +283,7 @@ func TestGetNotionWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -338,8 +332,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -422,8 +415,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -479,8 +471,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -552,8 +543,7 @@ func TestCreateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -641,8 +631,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -713,8 +702,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -787,8 +775,7 @@ func TestUpdateNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -877,8 +864,7 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -915,8 +901,7 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",
@@ -955,8 +940,7 @@ func TestDeleteNotionWishlistItem(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy_notion_api_key",
 			NotionDatabaseID: "dummy_notion_database_id",

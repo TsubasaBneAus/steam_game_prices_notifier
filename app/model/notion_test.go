@@ -12,8 +12,7 @@ func TestNotionToTime(t *testing.T) {
 		t.Parallel()
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		date := NotionDate{
 			Start: "2024-12-31",
 		}

@@ -1,7 +1,6 @@
 package discord
 
 import (
-	"context"
 	"errors"
 	"net/http"
 	"testing"
@@ -40,8 +39,7 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -84,8 +82,7 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -120,8 +117,7 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -164,8 +160,7 @@ func TestNotifyVideoGamePricesOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -213,8 +208,7 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -249,8 +243,7 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",
@@ -287,8 +280,7 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy_discord_webhook_id",
 			DiscordWebhookToken: "dummy_discord_webhook_token",

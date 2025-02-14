@@ -1,7 +1,6 @@
 package interactor
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"testing"
@@ -308,8 +307,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -540,8 +538,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -763,8 +760,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -789,8 +785,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
@@ -833,8 +828,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
@@ -894,8 +888,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "dummy-notion-database-id",
@@ -1038,8 +1031,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -1217,8 +1209,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -1339,8 +1330,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -1495,8 +1485,7 @@ func TestNotifyVideoGamePrices(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.NotionConfig{
 			NotionAPIKey:     "dummy-notion-api-key",
 			NotionDatabaseID: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
@@ -1528,8 +1517,7 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy-discord-webhook-id",
 			DiscordWebhookToken: "dummy-discord-webhook-token",
@@ -1559,8 +1547,7 @@ func TestNotifyErrorOnDiscord(t *testing.T) {
 		}
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.DiscordConfig{
 			DiscordWebhookID:    "dummy-discord-webhook-id",
 			DiscordWebhookToken: "dummy-discord-webhook-token",

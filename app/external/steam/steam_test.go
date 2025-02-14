@@ -2,7 +2,6 @@ package steam
 
 import (
 	"bytes"
-	"context"
 	"errors"
 	"io"
 	"net/http"
@@ -54,8 +53,7 @@ func TestGetSteamWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -117,8 +115,7 @@ func TestGetSteamWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -160,8 +157,7 @@ func TestGetSteamWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -194,8 +190,7 @@ func TestGetSteamWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -229,8 +224,7 @@ func TestGetSteamWishlist(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -278,8 +272,7 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 			})
 
 		// Execute the method to be tested (Skip checking the response)
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -329,8 +322,7 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -366,8 +358,7 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
@@ -404,8 +395,7 @@ func TestGetSteamVideoGameDetails(t *testing.T) {
 			})
 
 		// Execute the method to be tested
-		ctx, cancel := context.WithCancel(context.Background())
-		defer cancel()
+		ctx := t.Context()
 		cfg := &config.SteamConfig{
 			SteamUserID: "dummy_steam_user_id",
 		}
