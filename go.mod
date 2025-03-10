@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/shogo82148/pointer v1.3.0
 	go.uber.org/mock v0.5.0
-	golang.org/x/time v0.10.0
+	golang.org/x/time v0.11.0
 )
 
 require github.com/hashicorp/errwrap v1.1.0 // indirect
