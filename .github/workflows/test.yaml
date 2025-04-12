@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code into the Go module directory
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Go based on the go.mod file
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5.4.0
         with:
           go-version-file: "./go.mod"
 
@@ -22,7 +22,7 @@ jobs:
         run: go test -v -race -shuffle on ./app/... -coverprofile=coverage.out
 
       - name: Create a coverage report
-        uses: k1LoW/octocov-action@v1
+        uses: k1LoW/octocov-action@73d561f65d59e66899ed5c87e4621a913b5d5c20 # v1.5.0
         with:
           config: .octocov.yaml
 
@@ -34,10 +34,10 @@ jobs:
 
     steps:
       - name: Check out code into the AWS CDK directory
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           node-version-file: "./awscdk/package.json"
           cache: "npm"

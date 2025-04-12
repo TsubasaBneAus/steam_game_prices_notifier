@@ -7,7 +7,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/awscdk"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     groups:
       typescript:
         patterns:
@@ -21,3 +21,8 @@ updates:
           - "aws-cdk"
           - "aws-cdk-lib"
           - "constructs"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  
