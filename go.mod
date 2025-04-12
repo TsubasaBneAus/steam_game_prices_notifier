@@ -3,7 +3,7 @@ module github.com/TsubasaBneAus/steam_game_price_notifier
 go 1.24.0
 
 require (
-	github.com/aws/aws-lambda-go v1.47.0
+	github.com/aws/aws-lambda-go v1.48.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/google/go-cmp v0.7.0
 	github.com/google/wire v0.6.0
