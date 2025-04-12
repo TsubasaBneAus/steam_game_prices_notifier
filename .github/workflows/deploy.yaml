@@ -36,4 +36,4 @@ jobs:
             --function-name steam-game-prices-notifier-lambda \
             --architectures arm64 \
             --zip-file fileb://./function.zip \
-            --publish
+            --publish > /dev/null 2>&1
