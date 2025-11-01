@@ -12,11 +12,11 @@
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/node": "24.6.1",
+    "@types/node": "24.9.2",
     "aws-cdk": "2.1029.4",
     "dotenv": "^17.2.3",
     "jest": "^30.2.0",
-    "ts-jest": "^29.4.4",
+    "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
   },
