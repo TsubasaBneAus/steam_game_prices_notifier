@@ -49,30 +49,22 @@ export class NotifierStack extends cdk.Stack {
     rule.addTarget(new cdk.aws_events_targets.LambdaFunction(lambda));
 
     // Create a OIDC provider
-    const provider = new cdk.aws_iam.OpenIdConnectProvider(
-      this,
-      "OIDCProvider",
-      {
-        url: "https://token.actions.githubusercontent.com",
-        clientIds: ["sts.amazonaws.com"],
-      }
-    );
+    const provider = new cdk.aws_iam.OidcProviderNative(this, "OIDCProvider", {
+      url: "https://token.actions.githubusercontent.com",
+      clientIds: ["sts.amazonaws.com"],
+    });
 
     // Create a role for the OIDC provider
     const role = new cdk.aws_iam.Role(this, "Role", {
       roleName: "steam-game-prices-notifier-github-actions-role",
-      assumedBy: new cdk.aws_iam.WebIdentityPrincipal(
-        provider.openIdConnectProviderArn,
-        {
-          StringEquals: {
-            "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          },
-          StringLike: {
-            "token.actions.githubusercontent.com:sub":
-              "repo:TsubasaBneAus/steam_game_prices_notifier:*",
-          },
-        }
-      ),
+      assumedBy: new cdk.aws_iam.WebIdentityPrincipal(provider.oidcProviderArn, {
+        StringEquals: {
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+        },
+        StringLike: {
+          "token.actions.githubusercontent.com:sub": "repo:TsubasaBneAus/steam_game_prices_notifier:*",
+        },
+      }),
     });
     role.addToPolicy(
       new cdk.aws_iam.PolicyStatement({

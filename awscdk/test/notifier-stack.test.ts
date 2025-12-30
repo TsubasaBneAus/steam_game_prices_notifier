@@ -92,18 +92,18 @@ describe("Assertion tests", () => {
   });
 
   test("1 OIDC provider exists", () => {
-    template.resourceCountIs("Custom::AWSCDKOpenIdConnectProvider", 1);
+    template.resourceCountIs("AWS::IAM::OIDCProvider", 1);
   });
 
   test("The URL of the OIDC provider is 'https://token.actions.githubusercontent.com'", () => {
-    template.hasResourceProperties("Custom::AWSCDKOpenIdConnectProvider", {
+    template.hasResourceProperties("AWS::IAM::OIDCProvider", {
       Url: "https://token.actions.githubusercontent.com",
     });
   });
 
   test("The client IDs of the OIDC provider are 'sts.amazonaws.com'", () => {
-    template.hasResourceProperties("Custom::AWSCDKOpenIdConnectProvider", {
-      ClientIDList: ["sts.amazonaws.com"],
+    template.hasResourceProperties("AWS::IAM::OIDCProvider", {
+      ClientIdList: ["sts.amazonaws.com"],
     });
   });
 
@@ -128,8 +128,7 @@ describe("Assertion tests", () => {
                 "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
               },
               StringLike: {
-                "token.actions.githubusercontent.com:sub":
-                  "repo:TsubasaBneAus/steam_game_prices_notifier:*",
+                "token.actions.githubusercontent.com:sub": "repo:TsubasaBneAus/steam_game_prices_notifier:*",
               },
             },
           },
