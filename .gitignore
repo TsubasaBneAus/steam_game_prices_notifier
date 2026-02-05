@@ -1,6 +1,7 @@
 .env
 coverage.out
 *.zip
+.serena
 
 *.js
 !jest.config.js
