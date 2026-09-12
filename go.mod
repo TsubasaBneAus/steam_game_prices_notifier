@@ -1,6 +1,6 @@
 module github.com/TsubasaBneAus/steam_game_price_notifier
 
-go 1.26
+go 1.26.0
 
 require (
 	github.com/aws/aws-lambda-go v1.55.0
@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/shogo82148/pointer v1.4.0
 	go.uber.org/mock v0.6.0
-	golang.org/x/time v0.15.0
+	golang.org/x/time v0.16.0
 )
 
 require github.com/hashicorp/errwrap v1.1.0 // indirect
