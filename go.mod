@@ -4,7 +4,7 @@ go 1.27
 
 require (
 	github.com/aws/aws-lambda-go v1.55.1
-	github.com/caarlos0/env/v11 v11.4.1
+	github.com/caarlos0/env/v11 v11.4.2
 	github.com/google/go-cmp v0.7.0
 	github.com/google/wire v0.7.0
 	github.com/hashicorp/go-multierror v1.1.1
